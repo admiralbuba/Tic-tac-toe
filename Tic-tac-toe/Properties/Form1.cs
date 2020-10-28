@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tic_tac_toe.Properties;
 
@@ -28,12 +22,12 @@ namespace Tic_tac_toe
             foreach (Button button in Controls.OfType<Button>())
             {
                 button.Enabled = false;
-            } 
+            }
         }
         private void NewGameClick(object sender, EventArgs e)
         {
             TicTacToe.GetInstance().ResetGame();
-            foreach(Button button in Controls.OfType<Button>())
+            foreach (Button button in Controls.OfType<Button>())
             {
                 button.Text = String.Empty;
                 button.Enabled = true;
