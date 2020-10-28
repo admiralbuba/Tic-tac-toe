@@ -47,9 +47,10 @@ namespace Tic_tac_toe.Properties
             {
                 MessageBox.Show("Draw!");
             }
-            CheckForWinnerHorizontalAndVertical();
+            CheckForHorizontalAndVerticalWinner();
+            CheckForDiagonalWinner();
         }
-        private void CheckForWinnerHorizontalAndVertical()
+        private void CheckForHorizontalAndVerticalWinner()
         {
             for (int i = 0; i < 3; i++)
             {
@@ -75,13 +76,34 @@ namespace Tic_tac_toe.Properties
                 }
             }
         }
+        private void CheckForDiagonalWinner()
+        {
+            int sumXDiag = 0;
+            int sumODiag = 0;
+            int sumXAntiDiag = 0;
+            int sumOAntiDiag = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                if (map[i, i] == Values.X)
+                    sumXDiag++;
+                CheckForVictoryConditions(sumXDiag);
+                if (map[i, i * (-1) + 2] == Values.X)
+                    sumXAntiDiag++;
+                CheckForVictoryConditions(sumXAntiDiag);
+                if (map[i, i] == Values.O)
+                    sumODiag++;
+                CheckForVictoryConditions(sumODiag);
+                if (map[i, i * (-1) + 2] == Values.O)
+                    sumOAntiDiag++;
+                CheckForVictoryConditions(sumOAntiDiag);
+            }
+        }
         private void CheckForVictoryConditions(int sum)
         {
             if (sum == 3)
             {
                 MessageBox.Show("Winner");
-                var mainWindow = MainWindow.GetInstance();
-                mainWindow.DisableAllButtons();
+                MainWindow.GetInstance().DisableAllButtons();
             }
         }
     }
