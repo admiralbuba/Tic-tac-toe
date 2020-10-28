@@ -33,5 +33,11 @@ namespace Tic_tac_toe
                 button.Enabled = true;
             }
         }
+        private void AboutClick(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog();
+            //MessageBox.Show("This game is created by buba\rAll rights reserved 2020");
+        }
     }
 }
