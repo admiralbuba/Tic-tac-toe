@@ -9,10 +9,23 @@ namespace Tic_tac_toe.Properties
 {
     class TicTacToe
     {
+        private static TicTacToe Instance;
         public bool turn { get; set; }
         public int turnCount { get; set; }
         public Values[,] map { get; set; }
         public TicTacToe()
+        {
+            turn = true;
+            turnCount = 0;
+            map = new Values[3, 3];
+        }
+        public static TicTacToe GetInstance()
+        {
+            if (Instance == null)
+                Instance = new TicTacToe();
+            return Instance;
+        }
+        public void ResetGame()
         {
             turn = true;
             turnCount = 0;
