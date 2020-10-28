@@ -54,21 +54,19 @@ namespace Tic_tac_toe.Properties
                 int sumOVer = 0;
                 for (int j = 0; j < 3; j++)
                 {
-                    if (map[i, j] == Values.X)
-                        sumXHor++;
-                    CheckForVictoryConditions(sumXHor);
-                    if (map[j, i] == Values.X)
-                        sumXVer++;
-                    CheckForVictoryConditions(sumXVer);
-                    if (map[i, j] == Values.O)
-                        sumOHor++;
-                    CheckForVictoryConditions(sumOHor);
-                    if (map[j, i] == Values.O)
-                        sumOVer++;
-                    CheckForVictoryConditions(sumOVer);
+                    CheckInMap(i, j, Values.X, ref sumXHor);
+                    CheckInMap(j, i, Values.X, ref sumXVer);;
+                    CheckInMap(i, j, Values.O, ref sumOHor);
+                    CheckInMap(j, i, Values.O, ref sumOVer);
 
                 }
             }
+        }
+        private void CheckInMap(int i, int j, Values value, ref int sum)
+        {
+            if (map[i, j] == value)
+                sum++;
+            CheckForVictoryConditions(sum);
         }
         private void CheckForDiagonalWinner()
         {
@@ -78,18 +76,10 @@ namespace Tic_tac_toe.Properties
             int sumOAntiDiag = 0;
             for (int i = 0; i < 3; i++)
             {
-                if (map[i, i] == Values.X)
-                    sumXDiag++;
-                CheckForVictoryConditions(sumXDiag);
-                if (map[i, i * (-1) + 2] == Values.X)
-                    sumXAntiDiag++;
-                CheckForVictoryConditions(sumXAntiDiag);
-                if (map[i, i] == Values.O)
-                    sumODiag++;
-                CheckForVictoryConditions(sumODiag);
-                if (map[i, i * (-1) + 2] == Values.O)
-                    sumOAntiDiag++;
-                CheckForVictoryConditions(sumOAntiDiag);
+                CheckInMap(i, i, Values.X, ref sumXDiag);
+                CheckInMap(i, i * (-1) + 2, Values.X, ref sumXAntiDiag);
+                CheckInMap(i, i, Values.O, ref sumODiag);
+                CheckInMap(i, i * (-1) + 2, Values.O, ref sumOAntiDiag);
             }
         }
         private void CheckForVictoryConditions(int sum)
