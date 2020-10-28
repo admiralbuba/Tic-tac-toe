@@ -159,7 +159,7 @@ namespace Tic_tac_toe
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
             this.newGameToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.newGameToolStripMenuItem.Text = "&New Game";
-            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGame_Clicked);
+            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameClick);
             // 
             // MainWindow
             // 

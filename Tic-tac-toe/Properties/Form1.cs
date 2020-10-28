@@ -18,18 +18,11 @@ namespace Tic_tac_toe
         {
             InitializeComponent();
         }
-        public static MainWindow GetInstance()
-        {
-            if (Instance == null)
-                Instance = new MainWindow();
-            return Instance;
-        }
-
+        public static MainWindow GetInstance() => Instance ??= new MainWindow();
         private void ButtonClick(object sender, EventArgs e)
         {
-            TicTacToe.GetInstance().ButtonClick(sender);
+            TicTacToe.GetInstance().MakeTurn(sender);
         }
-
         public void DisableAllButtons()
         {
             foreach (Button button in Controls.OfType<Button>())
@@ -37,7 +30,7 @@ namespace Tic_tac_toe
                 button.Enabled = false;
             } 
         }
-        private void newGame_Clicked(object sender, EventArgs e)
+        private void NewGameClick(object sender, EventArgs e)
         {
             TicTacToe.GetInstance().ResetGame();
             foreach(Button button in Controls.OfType<Button>())

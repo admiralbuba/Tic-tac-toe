@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -19,19 +20,14 @@ namespace Tic_tac_toe.Properties
             turnCount = 0;
             map = new Values[3, 3];
         }
-        public static TicTacToe GetInstance()
-        {
-            if (Instance == null)
-                Instance = new TicTacToe();
-            return Instance;
-        }
+        public static TicTacToe GetInstance() => Instance ??= new TicTacToe();
         public void ResetGame()
         {
             turn = true;
             turnCount = 0;
             map = new Values[3, 3];
         }
-        public void ButtonClick(object sender)
+        public void MakeTurn(object sender)
         {
             Button button = (Button)sender;
             if (turn)
@@ -53,7 +49,6 @@ namespace Tic_tac_toe.Properties
             }
             CheckForWinnerHorizontalAndVertical();
         }
-
         private void CheckForWinnerHorizontalAndVertical()
         {
             for (int i = 0; i < 3; i++)
