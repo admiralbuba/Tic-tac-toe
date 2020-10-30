@@ -8,18 +8,19 @@ namespace Tic_tac_toe.Properties
         public bool turn { get; set; }
         public int turnCount { get; set; }
         public Values[,] map { get; set; }
+        private const int mapSize = 3;
         public TicTacToe()
         {
             turn = true;
             turnCount = 0;
-            map = new Values[3, 3];
+            map = new Values[mapSize, mapSize];
         }
         public static TicTacToe GetInstance() => Instance ??= new TicTacToe();
         public void ResetGame()
         {
             turn = true;
             turnCount = 0;
-            map = new Values[3, 3];
+            map = new Values[mapSize, mapSize];
         }
         public void MakeTurn(object sender)
         {
@@ -46,13 +47,13 @@ namespace Tic_tac_toe.Properties
         }
         private void CheckForHorizontalAndVerticalWinner()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < mapSize; i++)
             {
                 int sumXHor = 0;
                 int sumOHor = 0;
                 int sumXVer = 0;
                 int sumOVer = 0;
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < mapSize; j++)
                 {
                     CheckInMap(i, j, Values.X, ref sumXHor);
                     CheckInMap(j, i, Values.X, ref sumXVer);;
@@ -74,7 +75,7 @@ namespace Tic_tac_toe.Properties
             int sumODiag = 0;
             int sumXAntiDiag = 0;
             int sumOAntiDiag = 0;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < mapSize; i++)
             {
                 CheckInMap(i, i, Values.X, ref sumXDiag);
                 CheckInMap(i, i * (-1) + 2, Values.X, ref sumXAntiDiag);
@@ -84,7 +85,7 @@ namespace Tic_tac_toe.Properties
         }
         private void CheckForVictoryConditions(int sum)
         {
-            if (sum == 3)
+            if (sum == mapSize)
             {
                 MessageBox.Show("Winner");
                 MainWindow.GetInstance().DisableAllButtons();
