@@ -50,16 +50,21 @@ namespace Tic_tac_toe
             {
                 foreach (var item in turns)
                 {
-                    item.Turn = TicTacToe.GetInstance().Turn;
-                    item.TurnCount = TicTacToe.GetInstance().TurnCount;
+                    turns.DeleteOnSubmit(item);
+                    db.SubmitChanges();
                 }
+                InsertTurns(turns);
             }
             else
             {
-                var values = new Turns { Turn = TicTacToe.GetInstance().Turn, TurnCount = TicTacToe.GetInstance().TurnCount };
-                turns.InsertOnSubmit(values);
+                InsertTurns(turns);
             }
             db.SubmitChanges();
+        }
+        private static void InsertTurns(Table<Turns> turns)
+        {
+            var values = new Turns { Turn = TicTacToe.GetInstance().Turn, TurnCount = TicTacToe.GetInstance().TurnCount };
+            turns.InsertOnSubmit(values);
         }
         private static void GetMap(DataContext db)
         {
@@ -79,6 +84,7 @@ namespace Tic_tac_toe
                 TicTacToe.GetInstance().Turn = item.Turn;
                 TicTacToe.GetInstance().TurnCount = item.TurnCount;
             }
+            MainWindow.GetInstance().UpdateTurnLabel();
         }
     }
 }

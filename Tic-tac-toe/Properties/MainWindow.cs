@@ -44,6 +44,13 @@ namespace Tic_tac_toe
         {
             PlayerLable.Text = $"Turn now: PLayer {value}";
         }
+        public void UpdateTurnLabel()
+        {
+            if(TicTacToe.GetInstance().Turn)
+                PlayerLable.Text = $"Turn now: PLayer X";
+            else
+                PlayerLable.Text = $"Turn now: PLayer O";
+        }
         private void NewGameClick(object sender, EventArgs e)
         {
             TicTacToe.GetInstance().ResetGame();
