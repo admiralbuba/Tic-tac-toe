@@ -44,13 +44,14 @@ namespace Tic_tac_toe
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PlayerLable = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // A00
             // 
             this.A00.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.A00.Location = new System.Drawing.Point(11, 41);
+            this.A00.Location = new System.Drawing.Point(11, 62);
             this.A00.Name = "A00";
             this.A00.Size = new System.Drawing.Size(55, 55);
             this.A00.TabIndex = 0;
@@ -60,7 +61,7 @@ namespace Tic_tac_toe
             // A01
             // 
             this.A01.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.A01.Location = new System.Drawing.Point(82, 41);
+            this.A01.Location = new System.Drawing.Point(82, 62);
             this.A01.Name = "A01";
             this.A01.Size = new System.Drawing.Size(55, 55);
             this.A01.TabIndex = 0;
@@ -71,7 +72,7 @@ namespace Tic_tac_toe
             // A02
             // 
             this.A02.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.A02.Location = new System.Drawing.Point(152, 41);
+            this.A02.Location = new System.Drawing.Point(152, 62);
             this.A02.Name = "A02";
             this.A02.Size = new System.Drawing.Size(55, 55);
             this.A02.TabIndex = 0;
@@ -81,7 +82,7 @@ namespace Tic_tac_toe
             // B10
             // 
             this.B10.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.B10.Location = new System.Drawing.Point(11, 111);
+            this.B10.Location = new System.Drawing.Point(11, 132);
             this.B10.Name = "B10";
             this.B10.Size = new System.Drawing.Size(55, 55);
             this.B10.TabIndex = 0;
@@ -91,7 +92,7 @@ namespace Tic_tac_toe
             // B11
             // 
             this.B11.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.B11.Location = new System.Drawing.Point(82, 111);
+            this.B11.Location = new System.Drawing.Point(82, 132);
             this.B11.Name = "B11";
             this.B11.Size = new System.Drawing.Size(55, 55);
             this.B11.TabIndex = 0;
@@ -101,7 +102,7 @@ namespace Tic_tac_toe
             // B12
             // 
             this.B12.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.B12.Location = new System.Drawing.Point(152, 111);
+            this.B12.Location = new System.Drawing.Point(152, 132);
             this.B12.Name = "B12";
             this.B12.Size = new System.Drawing.Size(55, 55);
             this.B12.TabIndex = 0;
@@ -111,7 +112,7 @@ namespace Tic_tac_toe
             // C20
             // 
             this.C20.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.C20.Location = new System.Drawing.Point(11, 184);
+            this.C20.Location = new System.Drawing.Point(11, 205);
             this.C20.Name = "C20";
             this.C20.Size = new System.Drawing.Size(55, 55);
             this.C20.TabIndex = 0;
@@ -121,7 +122,7 @@ namespace Tic_tac_toe
             // C21
             // 
             this.C21.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.C21.Location = new System.Drawing.Point(82, 184);
+            this.C21.Location = new System.Drawing.Point(82, 205);
             this.C21.Name = "C21";
             this.C21.Size = new System.Drawing.Size(55, 55);
             this.C21.TabIndex = 0;
@@ -131,7 +132,7 @@ namespace Tic_tac_toe
             // C22
             // 
             this.C22.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.C22.Location = new System.Drawing.Point(152, 184);
+            this.C22.Location = new System.Drawing.Point(152, 205);
             this.C22.Name = "C22";
             this.C22.Size = new System.Drawing.Size(55, 55);
             this.C22.TabIndex = 0;
@@ -145,7 +146,7 @@ namespace Tic_tac_toe
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(220, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(223, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "Menu";
             // 
@@ -179,13 +180,24 @@ namespace Tic_tac_toe
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutClick);
             // 
+            // PlayerLable
+            // 
+            this.PlayerLable.AutoSize = true;
+            this.PlayerLable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.PlayerLable.Location = new System.Drawing.Point(12, 33);
+            this.PlayerLable.Name = "PlayerLable";
+            this.PlayerLable.Size = new System.Drawing.Size(119, 17);
+            this.PlayerLable.TabIndex = 2;
+            this.PlayerLable.Text = "Turn now: PLayer X";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(220, 251);
+            this.ClientSize = new System.Drawing.Size(223, 272);
+            this.Controls.Add(this.PlayerLable);
             this.Controls.Add(this.C22);
             this.Controls.Add(this.C21);
             this.Controls.Add(this.C20);
@@ -223,6 +235,7 @@ namespace Tic_tac_toe
         private ToolStripMenuItem newGameToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem aboutToolStripMenuItem;
+        public Label PlayerLable;
     }
 }
 
