@@ -90,7 +90,8 @@ namespace Tic_tac_toe.Properties
         {
             if (sum == mapSize)
             {
-                MessageBox.Show("Winner");
+                string message = turn ? $"{Values.O}" : $"{Values.X}"; 
+                MessageBox.Show($"Player {message} win!");
                 MainWindow.GetInstance().DisableAllButtons();
             }
         }
