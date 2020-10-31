@@ -8,7 +8,7 @@ namespace Tic_tac_toe.Models
     [Table(Name = "Turns")]
     public class Turns
     {
-        [Column(Name = "Turn", CanBeNull = true)]
+        [Column(Name = "Turn", CanBeNull = true, IsPrimaryKey = true)]
         public bool Turn { get; set; }
         [Column(Name = "TurnCount", CanBeNull = false)]
         public int TurnCount { get; set; }

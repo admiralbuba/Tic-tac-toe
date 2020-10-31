@@ -45,14 +45,20 @@ namespace Tic_tac_toe
         private static void SaveTurns(DataContext db)
         {
             Table<Turns> turns = db.GetTable<Turns>();
-
-            foreach (var item in turns)
+            var value = turns.GetNewBindingList(); 
+            if ( value is null || value.Count != 0)
             {
-                item.Turn = TicTacToe.GetInstance().Turn;
-                item.TurnCount = TicTacToe.GetInstance().TurnCount ;
+                foreach (var item in turns)
+                {
+                    item.Turn = TicTacToe.GetInstance().Turn;
+                    item.TurnCount = TicTacToe.GetInstance().TurnCount;
+                }
             }
-            var values = new Turns { Turn = TicTacToe.GetInstance().Turn, TurnCount = TicTacToe.GetInstance().TurnCount };
-            turns.InsertOnSubmit(values);
+            else
+            {
+                var values = new Turns { Turn = TicTacToe.GetInstance().Turn, TurnCount = TicTacToe.GetInstance().TurnCount };
+                turns.InsertOnSubmit(values);
+            }
             db.SubmitChanges();
         }
         private static void GetMap(DataContext db)
