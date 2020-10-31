@@ -18,7 +18,7 @@ namespace Tic_tac_toe
             Application.Run(mainWindow);
         }
     }
-    enum Values
+    public enum Values
     {
         Null,
         X,

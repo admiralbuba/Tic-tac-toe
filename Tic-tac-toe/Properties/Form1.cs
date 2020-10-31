@@ -24,6 +24,10 @@ namespace Tic_tac_toe
                 button.Enabled = false;
             }
         }
+        public void ChangeTurnLabel(Values value)
+        {
+            PlayerLable.Text = $"Turn now: PLayer {value}";
+        }
         private void NewGameClick(object sender, EventArgs e)
         {
             TicTacToe.GetInstance().ResetGame();

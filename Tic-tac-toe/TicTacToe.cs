@@ -21,7 +21,7 @@ namespace Tic_tac_toe.Properties
             turn = true;
             turnCount = 0;
             map = new Values[mapSize, mapSize];
-            MainWindow.GetInstance().PlayerLable.Text = $"Turn now: PLayer {Values.X}";
+            MainWindow.GetInstance().ChangeTurnLabel(Values.X);
         }
         public void MakeTurn(object sender)
         {
@@ -30,13 +30,13 @@ namespace Tic_tac_toe.Properties
             {
                 button.Text = "X";
                 ArrayHelper.PutValuesInMap(map, button, Values.X);
-                MainWindow.GetInstance().PlayerLable.Text = $"Turn now: PLayer {Values.O}";
+                MainWindow.GetInstance().ChangeTurnLabel(Values.O);
             }
             else
             {
                 button.Text = "O";
                 ArrayHelper.PutValuesInMap(map, button, Values.O);
-                MainWindow.GetInstance().PlayerLable.Text = $"Turn now: PLayer {Values.X}";
+                MainWindow.GetInstance().ChangeTurnLabel(Values.X);
             }
             button.Enabled = false;
             turn = !turn;

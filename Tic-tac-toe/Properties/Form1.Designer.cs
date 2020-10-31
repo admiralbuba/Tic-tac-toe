@@ -235,7 +235,7 @@ namespace Tic_tac_toe
         private ToolStripMenuItem newGameToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem aboutToolStripMenuItem;
-        public Label PlayerLable;
+        private Label PlayerLable;
     }
 }
 
