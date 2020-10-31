@@ -5,48 +5,56 @@ namespace Tic_tac_toe.Properties
     class TicTacToe
     {
         private static TicTacToe Instance;
-        public bool turn { get; set; }
-        public int turnCount { get; set; }
-        public Values[,] map { get; set; }
+        public bool Turn { get; set; }
+        public int TurnCount { get; set; }
+        public Values[,] Map { get; set; }
         private const int mapSize = 3;
         public TicTacToe()
         {
-            turn = true;
-            turnCount = 0;
-            map = new Values[mapSize, mapSize];
+            Turn = true;
+            TurnCount = 0;
+            Map = new Values[mapSize, mapSize];
         }
         public static TicTacToe GetInstance() => Instance ??= new TicTacToe();
         public void ResetGame()
         {
-            turn = true;
-            turnCount = 0;
-            map = new Values[mapSize, mapSize];
+            Turn = true;
+            TurnCount = 0;
+            Map = new Values[mapSize, mapSize];
             MainWindow.GetInstance().ChangeTurnLabel(Values.X);
         }
         public void MakeTurn(object sender)
         {
             Button button = (Button)sender;
-            if (turn)
+            if (Turn)
             {
                 button.Text = "X";
-                ArrayHelper.PutValuesInMap(map, button, Values.X);
+                ArrayHelper.PutValuesInMap(Map, button, Values.X);
                 MainWindow.GetInstance().ChangeTurnLabel(Values.O);
             }
             else
             {
                 button.Text = "O";
-                ArrayHelper.PutValuesInMap(map, button, Values.O);
+                ArrayHelper.PutValuesInMap(Map, button, Values.O);
                 MainWindow.GetInstance().ChangeTurnLabel(Values.X);
             }
             button.Enabled = false;
-            turn = !turn;
-            turnCount++;
-            if (turnCount == 9)
+            Turn = !Turn;
+            TurnCount++;
+            if (TurnCount == 9)
             {
                 MessageBox.Show("Draw!");
             }
             CheckForHorizontalAndVerticalWinner();
             CheckForDiagonalWinner();
+        }
+        public void SetInArray(string name)
+        {
+            if (MainWindow.GetInstance().GetButtonText(name) == "X")
+                ArrayHelper.PutValuesInMap(Map, MainWindow.GetInstance().GetButton(name), Values.X);
+            if (MainWindow.GetInstance().GetButtonText(name) == "O")
+                ArrayHelper.PutValuesInMap(Map, MainWindow.GetInstance().GetButton(name), Values.O);
+
         }
         private void CheckForHorizontalAndVerticalWinner()
         {
@@ -68,7 +76,7 @@ namespace Tic_tac_toe.Properties
         }
         private void CheckInMap(int i, int j, Values value, ref int sum)
         {
-            if (map[i, j] == value)
+            if (Map[i, j] == value)
                 sum++;
             CheckForVictoryConditions(sum);
         }
@@ -90,7 +98,7 @@ namespace Tic_tac_toe.Properties
         {
             if (sum == mapSize)
             {
-                string message = turn ? $"{Values.O}" : $"{Values.X}"; 
+                string message = Turn ? $"{Values.O}" : $"{Values.X}"; 
                 MessageBox.Show($"Player {message} win!");
                 MainWindow.GetInstance().DisableAllButtons();
             }
