@@ -14,8 +14,7 @@ namespace Tic_tac_toe
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var mainWindow = MainWindow.GetInstance();
-            Application.Run(mainWindow);
+            Application.Run(MainWindow.GetInstance());
         }
     }
     public enum Values

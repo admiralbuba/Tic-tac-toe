@@ -14,7 +14,6 @@ namespace Tic_tac_toe
     public static class DataBase
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
         public static void GetData()
         {
             using (DataContext db = new DataContext(connectionString))
