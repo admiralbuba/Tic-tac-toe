@@ -8,6 +8,7 @@ namespace Tic_tac_toe.Properties
         public bool Turn { get; set; }
         public int TurnCount { get; set; }
         public Values[,] Map { get; set; }
+        private bool isVictory = false;
         private const int mapSize = 3;
         public TicTacToe()
         {
@@ -41,12 +42,12 @@ namespace Tic_tac_toe.Properties
             button.Enabled = false;
             Turn = !Turn;
             TurnCount++;
-            if (TurnCount == 9)
+            CheckForHorizontalAndVerticalWinner();
+            CheckForDiagonalWinner();
+            if (TurnCount == 9 && isVictory == false)
             {
                 MessageBox.Show("Draw!");
             }
-            CheckForHorizontalAndVerticalWinner();
-            CheckForDiagonalWinner();
         }
         public void SetInArray(string name)
         {
@@ -101,6 +102,7 @@ namespace Tic_tac_toe.Properties
                 string message = Turn ? $"{Values.O}" : $"{Values.X}"; 
                 MessageBox.Show($"Player {message} win!");
                 MainWindow.GetInstance().DisableAllButtons();
+                isVictory = true;
             }
         }
     }
