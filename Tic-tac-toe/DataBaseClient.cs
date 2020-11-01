@@ -11,7 +11,7 @@ using Tic_tac_toe.Properties;
 
 namespace Tic_tac_toe
 {
-    public static class DataBase
+    public static class DataBaseClient
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         public static void GetData()
@@ -28,6 +28,7 @@ namespace Tic_tac_toe
             {
                 SaveMap(db);
                 SaveTurns(db);
+
             }
         }
         private static void SaveMap(DataContext db)

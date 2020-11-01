@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Tic_tac_toe.Models;
@@ -28,6 +29,10 @@ namespace Tic_tac_toe
         public Button GetButton(string name)
         {
             return Controls.OfType<Button>().Where(x => x.Name.ToString() == name).FirstOrDefault();
+        }
+        public List<Button> GetAllButtons()
+        {
+            return Controls.OfType<Button>().ToList();
         }
         public string GetButtonText(string name)
         {
@@ -67,11 +72,12 @@ namespace Tic_tac_toe
         }
         private void SaveClick(object sender, EventArgs e)
         {
-            DataBase.SaveData();
+            DataBaseClient.SaveData();
+            JSONSaver.SaveData();
         }
         private void LoadClick(object sender, EventArgs e)
         {
-            DataBase.GetData();
+            DataBaseClient.GetData();
         }
     }
 }

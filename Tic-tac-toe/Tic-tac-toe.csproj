@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Mindbox.Data.Linq" Version="3.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
