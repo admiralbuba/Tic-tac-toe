@@ -1,4 +1,6 @@
 ﻿using System.Windows.Forms;
+using System.Resources;
+using System.Globalization;
 
 namespace Tic_tac_toe
 {
@@ -166,21 +168,21 @@ namespace Tic_tac_toe
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
             this.newGameToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.newGameToolStripMenuItem.Text = "&New Game";
+            this.newGameToolStripMenuItem.Text = Properties.Strings.newGameLabel;
             this.newGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameClick);
             // 
             // saveGameToolStripMenuItem
             // 
             this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
             this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.saveGameToolStripMenuItem.Text = "&Save Game";
+            this.saveGameToolStripMenuItem.Text = Properties.Strings.saveGameLabel;
             this.saveGameToolStripMenuItem.Click += new System.EventHandler(this.SaveClick);
             // 
             // loadGameToolStripMenuItem
             // 
             this.loadGameToolStripMenuItem.Name = "loadGameToolStripMenuItem";
             this.loadGameToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.loadGameToolStripMenuItem.Text = "&Load Game";
+            this.loadGameToolStripMenuItem.Text = Properties.Strings.loadGameLabel;
             this.loadGameToolStripMenuItem.Click += new System.EventHandler(this.LoadClick);
             // 
             // helpStripMenuItem1
@@ -189,13 +191,13 @@ namespace Tic_tac_toe
             this.aboutToolStripMenuItem});
             this.helpStripMenuItem1.Name = "helpStripMenuItem1";
             this.helpStripMenuItem1.Size = new System.Drawing.Size(44, 20);
-            this.helpStripMenuItem1.Text = "Help";
+            this.helpStripMenuItem1.Text = Properties.Strings.helpLabel;
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.Text = Properties.Strings.aboutLabel;
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutClick);
             // 
             // PlayerLable

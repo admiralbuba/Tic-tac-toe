@@ -31,13 +31,11 @@ namespace Tic_tac_toe
             JArray gameInfo = new JArray();
             gameInfo.Add(buttonsInfo);
             gameInfo.Add(turns);
-            SaveJSONInFile(gameInfo);
+            File.WriteAllText(Utils.directoryPath + "info.json", gameInfo.ToString());
         }
 
-        private static void SaveJSONInFile(JArray jArray)
+        public static void GetData()
         {
-            File.WriteAllText(Utils.directoryPath + "info.json", jArray.ToString());
         }
-
     }
 }

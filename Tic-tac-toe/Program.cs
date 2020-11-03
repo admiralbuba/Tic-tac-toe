@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Tic_tac_toe
@@ -11,6 +13,7 @@ namespace Tic_tac_toe
         [STAThread]
         static void Main()
         {
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(System.Configuration.ConfigurationManager.AppSettings["Language"]);
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
