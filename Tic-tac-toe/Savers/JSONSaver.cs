@@ -19,8 +19,7 @@ namespace Tic_tac_toe
             foreach (var button in buttons)
             {
                 JObject buttonInfo = new JObject(
-                    new JProperty(button.Name),
-                    new JProperty(button.Text));
+                    new JProperty(button.Name, button.Text));
                 buttonsInfo.Add(buttonInfo);
             }
 
