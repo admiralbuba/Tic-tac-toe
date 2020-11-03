@@ -48,6 +48,7 @@ namespace Tic_tac_toe
             this.loadGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PlayerLable = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -168,37 +169,45 @@ namespace Tic_tac_toe
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
             this.newGameToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.newGameToolStripMenuItem.Text = Properties.Strings.newGameLabel;
+            this.newGameToolStripMenuItem.Text = "New Game";
             this.newGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameClick);
             // 
             // saveGameToolStripMenuItem
             // 
             this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
             this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.saveGameToolStripMenuItem.Text = Properties.Strings.saveGameLabel;
+            this.saveGameToolStripMenuItem.Text = "Save Game";
             this.saveGameToolStripMenuItem.Click += new System.EventHandler(this.SaveClick);
             // 
             // loadGameToolStripMenuItem
             // 
             this.loadGameToolStripMenuItem.Name = "loadGameToolStripMenuItem";
             this.loadGameToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.loadGameToolStripMenuItem.Text = Properties.Strings.loadGameLabel;
+            this.loadGameToolStripMenuItem.Text = "Load Game";
             this.loadGameToolStripMenuItem.Click += new System.EventHandler(this.LoadClick);
             // 
             // helpStripMenuItem1
             // 
             this.helpStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.helpStripMenuItem1.Name = "helpStripMenuItem1";
             this.helpStripMenuItem1.Size = new System.Drawing.Size(44, 20);
-            this.helpStripMenuItem1.Text = Properties.Strings.helpLabel;
+            this.helpStripMenuItem1.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = Properties.Strings.aboutLabel;
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutClick);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsClick);
             // 
             // PlayerLable
             // 
@@ -257,6 +266,7 @@ namespace Tic_tac_toe
         private ToolStripMenuItem loadGameToolStripMenuItem;
         private ToolStripMenuItem helpStripMenuItem1;
         private ToolStripMenuItem aboutToolStripMenuItem;
+        private ToolStripMenuItem settingsToolStripMenuItem;
         private Label PlayerLable;
     }
 }

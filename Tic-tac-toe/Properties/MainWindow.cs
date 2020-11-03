@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Tic_tac_toe.Models;
 using Tic_tac_toe.Properties;
+using Tic_tac_toe.Savers;
 
 namespace Tic_tac_toe
 {
@@ -45,7 +46,7 @@ namespace Tic_tac_toe
             button.Text = value;
             button.Enabled = String.IsNullOrEmpty(button.Text) ? true : false;
         }
-        public void ChangeTurnLabel(Values value)
+        public void ChangeTurnLabel(MapValues value)
         {
             PlayerLable.Text = $"Turn now: PLayer {value}";
         }
@@ -72,12 +73,15 @@ namespace Tic_tac_toe
         }
         private void SaveClick(object sender, EventArgs e)
         {
-            DataBaseClient.SaveData();
-            JSONSaver.SaveData();
+            Saver.SaveData();
         }
         private void LoadClick(object sender, EventArgs e)
         {
-            DataBaseClient.GetData();
+            Saver.GetData();
+        }
+        private void SettingsClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

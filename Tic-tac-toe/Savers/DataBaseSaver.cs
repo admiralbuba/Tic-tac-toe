@@ -11,7 +11,7 @@ using Tic_tac_toe.Properties;
 
 namespace Tic_tac_toe
 {
-    public static class DataBaseClient
+    public static class DataBaseSaver
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         public static void GetData()
