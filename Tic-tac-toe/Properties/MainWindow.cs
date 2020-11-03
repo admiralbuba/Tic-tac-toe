@@ -81,7 +81,8 @@ namespace Tic_tac_toe
         }
         private void SettingsClick(object sender, EventArgs e)
         {
-
+            Properties.Settings settings = new Properties.Settings();
+            settings.Show();
         }
     }
 }
