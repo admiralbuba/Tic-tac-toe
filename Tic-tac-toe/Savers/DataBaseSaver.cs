@@ -33,7 +33,7 @@ namespace Tic_tac_toe
         }
         private static void SaveMap(DataContext db)
         {
-            Table<Map> map = db.GetTable<Map>();
+            Table<ButtonInfo> map = db.GetTable<ButtonInfo>();
 
             foreach (var item in map)
             {
@@ -68,7 +68,7 @@ namespace Tic_tac_toe
         }
         private static void GetMap(DataContext db)
         {
-            Table<Map> map = db.GetTable<Map>();
+            Table<ButtonInfo> map = db.GetTable<ButtonInfo>();
 
             foreach (var item in map)
             {

@@ -34,10 +34,10 @@ namespace Tic_tac_toe.Properties
         }
         private void CheckRadioButtonCheck()
         {
-            var value = SaverLoader.setting;
-            if (value == Tic_tac_toe.Settings.DataBase)
+            var state = SaverLoader.setting;
+            if (state == Tic_tac_toe.Settings.DataBase)
                 DataBaseRadioButton.Checked = true;
-            if (value == Tic_tac_toe.Settings.JSON)
+            if (state == Tic_tac_toe.Settings.JSON)
                 JSONRadioButton.Checked = true;
         }
     }

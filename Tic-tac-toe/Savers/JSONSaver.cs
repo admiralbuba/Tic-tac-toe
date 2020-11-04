@@ -15,6 +15,7 @@ namespace Tic_tac_toe
     {
         public static void SaveData()
         {
+
             JArray buttonsInfo = new JArray();
             var buttons = MainWindow.GetInstance().GetAllButtons();
             foreach (var button in buttons)
@@ -40,18 +41,15 @@ namespace Tic_tac_toe
         public static void GetData()
         {
             var jarray = JArray.Parse(File.ReadAllText(Utils.directoryPath + "info.json"));
-            List<Map> map = new List<Map>();
-            foreach (var item in jarray[0])
+            var mapInfo = JsonConvert.DeserializeObject<List<ButtonInfo>>(jarray[0].ToString());
+            var turnsInfo = JsonConvert.DeserializeObject<Turns>(jarray[1][0].ToString());
+            foreach (var item in mapInfo)
             {
-                MainWindow.GetInstance().SetButtonText(JsonConvert.DeserializeObject<Map>(item.ToString()).Id,
-                JsonConvert.DeserializeObject<Map>(item.ToString()).Value);
-                TicTacToe.GetInstance().SetInArray(JsonConvert.DeserializeObject<Map>(item.ToString()).Id);
+                MainWindow.GetInstance().SetButtonText(item.Id, item.Value);
+                TicTacToe.GetInstance().SetInArray(item.Id);
             }
-            foreach (var item in jarray[1])
-            {
-                TicTacToe.GetInstance().Turn = (JsonConvert.DeserializeObject<Turns>(item.ToString()).Turn);
-                TicTacToe.GetInstance().TurnCount = JsonConvert.DeserializeObject<Turns>(item.ToString()).TurnCount;
-            }
+            TicTacToe.GetInstance().Turn = turnsInfo.Turn;
+            TicTacToe.GetInstance().TurnCount = turnsInfo.TurnCount;
             MainWindow.GetInstance().UpdateTurnLabel();
         }
     }
