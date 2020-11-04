@@ -14,23 +14,31 @@ namespace Tic_tac_toe.Properties
         public Settings()
         {
             InitializeComponent();
+            CheckRadioButtonCheck();
         }
         private void DataBaseCheckedChanged(object sender, EventArgs e)
         {
             RadioButton radioButton = (RadioButton)sender;
             if (radioButton.Checked)
             {
-                Saver.setting = Tic_tac_toe.Settings.DataBase;
+                SaverLoader.setting = Tic_tac_toe.Settings.DataBase;
             }
         }
-
         private void JSONCheckedChanged(object sender, EventArgs e)
         {
             RadioButton radioButton = (RadioButton)sender;
             if (radioButton.Checked)
             {
-                Saver.setting = Tic_tac_toe.Settings.JSON;
+                SaverLoader.setting = Tic_tac_toe.Settings.JSON;
             }
+        }
+        private void CheckRadioButtonCheck()
+        {
+            var value = SaverLoader.setting;
+            if (value == Tic_tac_toe.Settings.DataBase)
+                DataBaseRadioButton.Checked = true;
+            if (value == Tic_tac_toe.Settings.JSON)
+                JSONRadioButton.Checked = true;
         }
     }
 }

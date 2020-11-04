@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,22 +20,39 @@ namespace Tic_tac_toe
             foreach (var button in buttons)
             {
                 JObject buttonInfo = new JObject(
-                    new JProperty(button.Name, button.Text));
+                    new JProperty("Id", button.Name),
+                    new JProperty("Value", button.Text));
                 buttonsInfo.Add(buttonInfo);
             }
 
+            JArray turnsInfo = new JArray();
             JObject turns = new JObject(
-                new JProperty(TicTacToe.GetInstance().Turn.ToString()),
-                new JProperty(TicTacToe.GetInstance().TurnCount.ToString()));
+                new JProperty("Turn", TicTacToe.GetInstance().Turn.ToString()),
+                new JProperty("TurnCount", TicTacToe.GetInstance().TurnCount.ToString()));
+            turnsInfo.Add(turns);
 
             JArray gameInfo = new JArray();
             gameInfo.Add(buttonsInfo);
-            gameInfo.Add(turns);
+            gameInfo.Add(turnsInfo);
             File.WriteAllText(Utils.directoryPath + "info.json", gameInfo.ToString());
         }
 
         public static void GetData()
         {
+            var jarray = JArray.Parse(File.ReadAllText(Utils.directoryPath + "info.json"));
+            List<Map> map = new List<Map>();
+            foreach (var item in jarray[0])
+            {
+                MainWindow.GetInstance().SetButtonText(JsonConvert.DeserializeObject<Map>(item.ToString()).Id,
+                JsonConvert.DeserializeObject<Map>(item.ToString()).Value);
+                TicTacToe.GetInstance().SetInArray(JsonConvert.DeserializeObject<Map>(item.ToString()).Id);
+            }
+            foreach (var item in jarray[1])
+            {
+                TicTacToe.GetInstance().Turn = (JsonConvert.DeserializeObject<Turns>(item.ToString()).Turn);
+                TicTacToe.GetInstance().TurnCount = JsonConvert.DeserializeObject<Turns>(item.ToString()).TurnCount;
+            }
+            MainWindow.GetInstance().UpdateTurnLabel();
         }
     }
 }

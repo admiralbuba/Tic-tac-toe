@@ -30,8 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.JSONRadioButton = new System.Windows.Forms.RadioButton();
+            this.DataBaseRadioButton = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,8 +46,8 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton1);
+            this.panel1.Controls.Add(this.JSONRadioButton);
+            this.panel1.Controls.Add(this.DataBaseRadioButton);
             this.panel1.Location = new System.Drawing.Point(59, 35);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(119, 71);
@@ -55,27 +55,27 @@
             // 
             // radioButton2
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(14, 38);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(53, 19);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "JSON";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.JSONCheckedChanged);
+            this.JSONRadioButton.AutoSize = true;
+            this.JSONRadioButton.Location = new System.Drawing.Point(14, 38);
+            this.JSONRadioButton.Name = "radioButton2";
+            this.JSONRadioButton.Size = new System.Drawing.Size(53, 19);
+            this.JSONRadioButton.TabIndex = 1;
+            this.JSONRadioButton.Text = "JSON";
+            this.JSONRadioButton.UseVisualStyleBackColor = true;
+            this.JSONRadioButton.CheckedChanged += new System.EventHandler(this.JSONCheckedChanged);
             // 
             // radioButton1
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(14, 13);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(73, 19);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "DataBase";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.DataBaseCheckedChanged);
+            this.DataBaseRadioButton.AutoSize = true;
+            this.DataBaseRadioButton.Checked = true;
+            this.DataBaseRadioButton.Location = new System.Drawing.Point(14, 13);
+            this.DataBaseRadioButton.Name = "radioButton1";
+            this.DataBaseRadioButton.Size = new System.Drawing.Size(73, 19);
+            this.DataBaseRadioButton.TabIndex = 0;
+            this.DataBaseRadioButton.TabStop = true;
+            this.DataBaseRadioButton.Text = "DataBase";
+            this.DataBaseRadioButton.UseVisualStyleBackColor = true;
+            this.DataBaseRadioButton.CheckedChanged += new System.EventHandler(this.DataBaseCheckedChanged);
             // 
             // Settings
             // 
@@ -98,7 +98,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton JSONRadioButton;
+        private System.Windows.Forms.RadioButton DataBaseRadioButton;
     }
 }

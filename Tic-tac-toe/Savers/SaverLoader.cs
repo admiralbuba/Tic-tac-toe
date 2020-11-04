@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tic_tac_toe.Savers
 {
-    public static class Saver
+    public static class SaverLoader
     {
         public static Settings setting { get; set; } = Settings.DataBase;
         public static void SaveData()

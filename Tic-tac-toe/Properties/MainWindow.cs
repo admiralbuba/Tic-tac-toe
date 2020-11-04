@@ -73,11 +73,11 @@ namespace Tic_tac_toe
         }
         private void SaveClick(object sender, EventArgs e)
         {
-            Saver.SaveData();
+            SaverLoader.SaveData();
         }
         private void LoadClick(object sender, EventArgs e)
         {
-            Saver.GetData();
+            SaverLoader.GetData();
         }
         private void SettingsClick(object sender, EventArgs e)
         {
