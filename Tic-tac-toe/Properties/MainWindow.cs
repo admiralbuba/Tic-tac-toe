@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Tic_tac_toe.Models;
 using Tic_tac_toe.Properties;
 using Tic_tac_toe.Savers;
 

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
-using System.Text;
-using System.Windows.Forms.VisualStyles;
-using System.Linq;
 using System.Data.Linq;
 using Tic_tac_toe.Models;
 using Tic_tac_toe.Properties;

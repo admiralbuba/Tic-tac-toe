@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Data.Linq.Mapping;
-using System.Text;
 
 namespace Tic_tac_toe.Models
 {
