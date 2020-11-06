@@ -50,6 +50,8 @@ namespace Tic_tac_toe
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PlayerLable = new System.Windows.Forms.Label();
+            this.XCount = new System.Windows.Forms.Label();
+            this.OCount = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -219,6 +221,24 @@ namespace Tic_tac_toe
             this.PlayerLable.TabIndex = 2;
             this.PlayerLable.Text = "Turn now: PLayer X";
             // 
+            // XCount
+            // 
+            this.XCount.AutoSize = true;
+            this.XCount.Location = new System.Drawing.Point(180, 29);
+            this.XCount.Name = "XCount";
+            this.XCount.Size = new System.Drawing.Size(29, 15);
+            this.XCount.TabIndex = 3;
+            this.XCount.Text = "X : 0";
+            // 
+            // OCount
+            // 
+            this.OCount.AutoSize = true;
+            this.OCount.Location = new System.Drawing.Point(178, 44);
+            this.OCount.Name = "OCount";
+            this.OCount.Size = new System.Drawing.Size(31, 15);
+            this.OCount.TabIndex = 3;
+            this.OCount.Text = "O : 0";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -226,6 +246,8 @@ namespace Tic_tac_toe
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(223, 272);
+            this.Controls.Add(this.OCount);
+            this.Controls.Add(this.XCount);
             this.Controls.Add(this.PlayerLable);
             this.Controls.Add(this.C22);
             this.Controls.Add(this.C21);
@@ -268,6 +290,8 @@ namespace Tic_tac_toe
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private Label PlayerLable;
+        private Label XCount;
+        private Label OCount;
     }
 }
 

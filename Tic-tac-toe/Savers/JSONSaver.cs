@@ -19,6 +19,8 @@ namespace Tic_tac_toe
             }
             gameInfo.Turns.Turn = TicTacToe.GetInstance().Turn;
             gameInfo.Turns.TurnCount = TicTacToe.GetInstance().TurnCount;
+            gameInfo.WinnersCount.PlayerXWinCount = TicTacToe.GetInstance().PlayerXWinCount;
+            gameInfo.WinnersCount.PlayerOWinCount = TicTacToe.GetInstance().PlayerOWinCount;
             var str = JsonConvert.SerializeObject(gameInfo);
             File.WriteAllText(Utils.directoryPath + "info.json", str);
         }
@@ -33,7 +35,11 @@ namespace Tic_tac_toe
             }
             TicTacToe.GetInstance().Turn = gameInfo.Turns.Turn;
             TicTacToe.GetInstance().TurnCount = gameInfo.Turns.TurnCount;
+            TicTacToe.GetInstance().PlayerXWinCount = gameInfo.WinnersCount.PlayerXWinCount;
+            TicTacToe.GetInstance().PlayerOWinCount = gameInfo.WinnersCount.PlayerOWinCount;
+            MainWindow.GetInstance().UpdateWinnerLabel();
             MainWindow.GetInstance().UpdateTurnLabel();
+            TicTacToe.GetInstance().CheckForWinner();
         }
     }
 }

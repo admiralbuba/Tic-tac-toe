@@ -56,6 +56,13 @@ namespace Tic_tac_toe
             else
                 PlayerLable.Text = $"Turn now: PLayer O";
         }
+        public void UpdateWinnerLabel()
+        {
+            var xCount = TicTacToe.GetInstance().PlayerXWinCount;
+            XCount.Text = $"X : {xCount}";
+            var oCount = TicTacToe.GetInstance().PlayerOWinCount;
+            OCount.Text = $"O : {oCount}";
+        }
         private void NewGameClick(object sender, EventArgs e)
         {
             TicTacToe.GetInstance().ResetGame();

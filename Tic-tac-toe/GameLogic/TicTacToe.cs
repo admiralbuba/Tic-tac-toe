@@ -7,6 +7,8 @@ namespace Tic_tac_toe.Properties
         private static TicTacToe Instance;
         public bool Turn { get; set; }
         public int TurnCount { get; set; }
+        public byte PlayerXWinCount { get; set; }
+        public byte PlayerOWinCount { get; set; }
         public MapValues[,] Map { get; set; }
         private bool isVictory = false;
         private const int mapSize = 3;
@@ -22,7 +24,10 @@ namespace Tic_tac_toe.Properties
             Turn = true;
             TurnCount = 0;
             Map = new MapValues[mapSize, mapSize];
+            PlayerXWinCount = 0;
+            PlayerOWinCount = 0;
             MainWindow.GetInstance().ChangeTurnLabel(MapValues.X);
+            MainWindow.GetInstance().UpdateWinnerLabel();
         }
         public void MakeTurn(object sender)
         {
@@ -42,12 +47,16 @@ namespace Tic_tac_toe.Properties
             button.Enabled = false;
             Turn = !Turn;
             TurnCount++;
-            CheckForHorizontalAndVerticalWinner();
-            CheckForDiagonalWinner();
+            CheckForWinner();
             if (TurnCount == 9 && isVictory == false)
             {
                 MessageBox.Show("Draw!");
             }
+        }
+        public void CheckForWinner()
+        {
+            CheckForHorizontalAndVerticalWinner();
+            CheckForDiagonalWinner();
         }
         public void SetInArray(string name)
         {
@@ -99,10 +108,20 @@ namespace Tic_tac_toe.Properties
         {
             if (sum == mapSize)
             {
-                string message = Turn ? $"{MapValues.O}" : $"{MapValues.X}"; 
-                MessageBox.Show($"Player {message} win!");
+                var winner = Turn ? MapValues.O : MapValues.X;
+                MessageBox.Show($"Player {winner} win!");
                 MainWindow.GetInstance().DisableAllButtons();
                 isVictory = true;
+                if (winner == MapValues.X)
+                {
+                    PlayerXWinCount++;
+                    MainWindow.GetInstance().UpdateWinnerLabel();
+                }                    
+                if (winner == MapValues.O)
+                {
+                    PlayerOWinCount++;
+                    MainWindow.GetInstance().UpdateWinnerLabel();
+                }
             }
         }
     }
