@@ -15,6 +15,7 @@ namespace Tic_tac_toe
             {
                 GetMap(db);
                 GetTurns(db);
+                GetWinnersCount(db);
             }
         }
         public static void SaveData()
@@ -23,7 +24,7 @@ namespace Tic_tac_toe
             {
                 SaveMap(db);
                 SaveTurns(db);
-
+                SaveWinnersCount(db);
             }
         }
         private static void SaveMap(DataContext db)
@@ -40,8 +41,8 @@ namespace Tic_tac_toe
         private static void SaveTurns(DataContext db)
         {
             Table<Turns> turns = db.GetTable<Turns>();
-            var value = turns.GetNewBindingList(); 
-            if ( value is null || value.Count != 0)
+            var value = turns.GetNewBindingList();
+            if (value is null || value.Count != 0)
             {
                 foreach (var item in turns)
                 {
@@ -55,6 +56,34 @@ namespace Tic_tac_toe
                 InsertTurns(turns);
             }
             db.SubmitChanges();
+        }
+        private static void SaveWinnersCount(DataContext db)
+        {
+            Table<WinnersCount> winnersCounts = db.GetTable<WinnersCount>();
+            var value = winnersCounts.GetNewBindingList();
+            if (value is null || value.Count != 0)
+            {
+                foreach (var item in winnersCounts)
+                {
+                    winnersCounts.DeleteOnSubmit(item);
+                    db.SubmitChanges();
+                }
+                InsertWinnersCounts(winnersCounts);
+            }
+            else
+            {
+                InsertWinnersCounts(winnersCounts);
+            }
+            db.SubmitChanges();
+        }
+        private static void InsertWinnersCounts(Table<WinnersCount> winnersCounts)
+        {
+            var values = new WinnersCount
+            {
+                PlayerXWinCount = TicTacToe.GetInstance().PlayerXWinCount,
+                PlayerOWinCount = TicTacToe.GetInstance().PlayerOWinCount
+            };
+            winnersCounts.InsertOnSubmit(values);
         }
         private static void InsertTurns(Table<Turns> turns)
         {
@@ -80,6 +109,16 @@ namespace Tic_tac_toe
                 TicTacToe.GetInstance().TurnCount = item.TurnCount;
             }
             MainWindow.GetInstance().UpdateTurnLabel();
+        }
+        private static void GetWinnersCount(DataContext db)
+        {
+            Table<WinnersCount> turns = db.GetTable<WinnersCount>();
+            foreach (var item in turns)
+            {
+                TicTacToe.GetInstance().PlayerXWinCount = item.PlayerXWinCount;
+                TicTacToe.GetInstance().PlayerOWinCount = item.PlayerOWinCount;
+            }
+            MainWindow.GetInstance().UpdateWinnerLabel();
         }
     }
 }
