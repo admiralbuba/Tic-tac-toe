@@ -71,6 +71,10 @@ namespace Tic_tac_toe
         private void NewGameClick(object sender, EventArgs e)
         {
             TicTacToe.GetInstance().ResetGame();
+            ReleaseButtons();
+        }
+        public void ReleaseButtons()
+        {
             foreach (Button button in Controls.OfType<Button>())
             {
                 button.Text = String.Empty;

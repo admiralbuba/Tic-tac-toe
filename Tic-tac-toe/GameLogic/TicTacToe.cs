@@ -22,13 +22,17 @@ namespace Tic_tac_toe.Properties
         public static TicTacToe GetInstance() => Instance ??= new TicTacToe();
         public void ResetGame()
         {
+            ResetMap();
+            PlayerXWinCount = 0;
+            PlayerOWinCount = 0;
+            MainWindow.GetInstance().UpdateWinnerLabel();
+        }
+        private void ResetMap()
+        {
             Turn = true;
             TurnCount = 0;
             Map = new MapValues[mapSize, mapSize];
-            PlayerXWinCount = 0;
-            PlayerOWinCount = 0;
             MainWindow.GetInstance().ChangeTurnLabel(MapValues.X);
-            MainWindow.GetInstance().UpdateWinnerLabel();
         }
         public void MakeTurn(object sender)
         {
@@ -92,7 +96,7 @@ namespace Tic_tac_toe.Properties
                 for (int j = 0; j < mapSize; j++)
                 {
                     CheckInMap(i, j, MapValues.X, ref sumXHor);
-                    CheckInMap(j, i, MapValues.X, ref sumXVer);;
+                    CheckInMap(j, i, MapValues.X, ref sumXVer); ;
                     CheckInMap(i, j, MapValues.O, ref sumOHor);
                     CheckInMap(j, i, MapValues.O, ref sumOVer);
 
@@ -124,19 +128,34 @@ namespace Tic_tac_toe.Properties
             if (sum == mapSize)
             {
                 var winner = Turn ? MapValues.O : MapValues.X;
-                MessageBox.Show($"Player {winner} win!");
-                MainWindow.GetInstance().DisableAllButtons();
-                isVictory = true;
-                if (winner == MapValues.X)
+                DialogResult result = MessageBox.Show($"Player {winner} win!\rDo you want to continue round?",
+                    "The End",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.None,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly);
+                if (result == DialogResult.Yes)
                 {
-                    PlayerXWinCount++;
-                    MainWindow.GetInstance().UpdateWinnerLabel();
-                }                    
-                if (winner == MapValues.O)
-                {
-                    PlayerOWinCount++;
-                    MainWindow.GetInstance().UpdateWinnerLabel();
+                    if (winner == MapValues.X)
+                    {
+                        PlayerXWinCount++;
+                        MainWindow.GetInstance().UpdateWinnerLabel();
+                    }
+                    if (winner == MapValues.O)
+                    {
+                        PlayerOWinCount++;
+                        MainWindow.GetInstance().UpdateWinnerLabel();
+                    }
+                    ResetMap();
+                    MainWindow.GetInstance().ReleaseButtons();
                 }
+                else
+                {
+                    ResetGame();
+                    MainWindow.GetInstance().ReleaseButtons();
+                }
+                    //MainWindow.GetInstance().DisableAllButtons();
+                    isVictory = true;                
             }
         }
     }
