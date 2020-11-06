@@ -17,12 +17,8 @@ namespace Tic_tac_toe
                     Id = button.Name, 
                     Value = button.Text });
             }
-            gameInfo.Turns.Turn = TicTacToe.GetInstance().Turn;
-            gameInfo.Turns.TurnCount = TicTacToe.GetInstance().TurnCount;
-            gameInfo.WinnersCount.PlayerXWinCount = TicTacToe.GetInstance().PlayerXWinCount;
-            gameInfo.WinnersCount.PlayerOWinCount = TicTacToe.GetInstance().PlayerOWinCount;
-            var str = JsonConvert.SerializeObject(gameInfo);
-            File.WriteAllText(Utils.directoryPath + "info.json", str);
+            TicTacToe.GetInstance().PutMapInfoIntoGameInfoObject(gameInfo);
+            File.WriteAllText(Utils.directoryPath + "info.json", JsonConvert.SerializeObject(gameInfo));
         }
 
         public static void GetData()
@@ -33,12 +29,8 @@ namespace Tic_tac_toe
                 MainWindow.GetInstance().SetButtonText(item.Id, item.Value);
                 TicTacToe.GetInstance().SetInArray(item.Id);
             }
-            TicTacToe.GetInstance().Turn = gameInfo.Turns.Turn;
-            TicTacToe.GetInstance().TurnCount = gameInfo.Turns.TurnCount;
-            TicTacToe.GetInstance().PlayerXWinCount = gameInfo.WinnersCount.PlayerXWinCount;
-            TicTacToe.GetInstance().PlayerOWinCount = gameInfo.WinnersCount.PlayerOWinCount;
-            MainWindow.GetInstance().UpdateWinnerLabel();
-            MainWindow.GetInstance().UpdateTurnLabel();
+            TicTacToe.GetInstance().GetMapInfoFromGameInfoObject(gameInfo);
+            MainWindow.GetInstance().UpdateMainWindowsLabels();
             TicTacToe.GetInstance().CheckForWinner();
         }
     }

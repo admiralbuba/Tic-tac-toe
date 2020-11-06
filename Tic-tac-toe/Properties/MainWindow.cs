@@ -45,6 +45,11 @@ namespace Tic_tac_toe
             button.Text = value;
             button.Enabled = String.IsNullOrEmpty(button.Text) ? true : false;
         }
+        public void UpdateMainWindowsLabels()
+        {
+            UpdateTurnLabel();
+            UpdateWinnerLabel();
+        }
         public void ChangeTurnLabel(MapValues value)
         {
             PlayerLable.Text = $"Turn now: PLayer {value}";

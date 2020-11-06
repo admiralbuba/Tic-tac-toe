@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Tic_tac_toe.Models;
 
 namespace Tic_tac_toe.Properties
 {
@@ -65,6 +66,20 @@ namespace Tic_tac_toe.Properties
             if (MainWindow.GetInstance().GetButtonText(name) == "O")
                 ArrayHelper.PutValuesInMap(Map, MainWindow.GetInstance().GetButton(name), MapValues.O);
 
+        }
+        public void PutMapInfoIntoGameInfoObject(GameInfo gameInfo)
+        {
+            gameInfo.Turns.Turn = Turn;
+            gameInfo.Turns.TurnCount = TurnCount;
+            gameInfo.WinnersCount.PlayerXWinCount = PlayerXWinCount;
+            gameInfo.WinnersCount.PlayerOWinCount = PlayerOWinCount;
+        }
+        public void GetMapInfoFromGameInfoObject(GameInfo gameInfo)
+        {
+            Turn = gameInfo.Turns.Turn;
+            TurnCount = gameInfo.Turns.TurnCount;
+            PlayerXWinCount = gameInfo.WinnersCount.PlayerXWinCount;
+            PlayerOWinCount = gameInfo.WinnersCount.PlayerOWinCount;
         }
         private void CheckForHorizontalAndVerticalWinner()
         {
