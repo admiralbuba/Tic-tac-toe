@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Tic_tac_toe.Models;
 using WebAPITicTacToe.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,7 +23,7 @@ namespace WebAPITicTacToe.Controllers
         }
         // GET: api/<ButtonsInfoController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Map>>> Get()
+        public async Task<ActionResult<IEnumerable<ButtonInfo>>> Get()
         {
             return await db.Map.ToListAsync();
         }

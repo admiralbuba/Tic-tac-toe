@@ -29,6 +29,8 @@ namespace WebAPITicTacToe
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MapContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<TurnsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<WinnersCountContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
         }
 

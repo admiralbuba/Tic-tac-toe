@@ -3,10 +3,10 @@ using Tic_tac_toe.Models;
 
 namespace WebAPITicTacToe.Models
 {
-    public class MapContext : DbContext
+    public class WinnersCountContext : DbContext
     {
-        public DbSet<ButtonInfo> Map { get; set; }
-        public MapContext(DbContextOptions<MapContext> options)
+        public DbSet<WinnersCount> WinnerCount { get; set; }
+        public WinnersCountContext(DbContextOptions<WinnersCountContext> options)
             : base(options)
         {
             Database.EnsureCreated();
