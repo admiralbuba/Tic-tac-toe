@@ -15,23 +15,49 @@
     <link rel="stylesheet" href="~/css/style.css">
 </head>
 <body>
+    @functions
+{
+        public int GetFactorial(int n)
+        {
+            int result = 1;
+            for (int i = 1; i <= n; i++)
+                result *= i;
+            return result;
+        }
+    }
+    <div>Факториал числа 6 равен: @GetFactorial(6)</div>
+    <p>Дата: @DateTime.Now.ToLongDateString()</p>
     <section>
         <h1 class="game--title">Tic Tac Toe</h1>
         <div class="game--container">
-            <div data-cell-index="0" class="cell"></div>
-            <div data-cell-index="1" class="cell"></div>
-            <div data-cell-index="2" class="cell"></div>
-            <div data-cell-index="3" class="cell"></div>
-            <div data-cell-index="4" class="cell"></div>
-            <div data-cell-index="5" class="cell"></div>
-            <div data-cell-index="6" class="cell"></div>
-            <div data-cell-index="7" class="cell"></div>
-            <div data-cell-index="8" class="cell"></div>
+            <input onclick="change(this.id)" type="button" id="A00" class="cell" value="X">
+            <input onclick="change(this.id)" type="button" id="A01" class="cell" value="O">
+            <input onclick="change(this.id)" type="button" id="A02" class="cell" value="X">
+            <input onclick="change(this.id)" type="button" id="A10" class="cell" value="X">
+            <input onclick="change(this.id)" type="button" id="A11" class="cell" value="">
+            <input onclick="change(this.id)" type="button" id="A12" class="cell" value="">
+            <input onclick="change(this.id)" type="button" id="A20" class="cell" value="O">
+            <input onclick="change(this.id)" type="button" id="A21" class="cell" value="">
+            <input onclick="change(this.id)" type="button" id="A22" class="cell" value="O">
         </div>
+        <p>Дата: @DateTime.Now.ToLongDateString()</p>
         <h2 class="game--status"></h2>
-        <button class="game--restart">CHECK</button>
         <button class="game--restart">Restart Game</button>
     </section>
-    <script src="script.js"></script>
+    <div>
+        <h3>Test</h3>
+        <form method="post" action="">
+            <input type="hidden" value="@ViewBag.Value" name="Id" />
+            <table>
+                <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>
+            </table>
+        </form>
+    </div>
+    <script type="text/javascript">
+        function change(id) {
+            var btn = document.getElementById(id);
+            btn.value = btn.value == "X" ? "O" : "X"
+        }
+    </script>
 </body>
 </html>
