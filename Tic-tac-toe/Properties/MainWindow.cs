@@ -56,7 +56,7 @@ namespace Tic_tac_toe
         }
         public void UpdateTurnLabel()
         {
-            if(TicTacToe.GetInstance().Turn)
+            if (TicTacToe.GetInstance().Turn)
                 PlayerLable.Text = $"Turn now: PLayer X";
             else
                 PlayerLable.Text = $"Turn now: PLayer O";
@@ -67,6 +67,17 @@ namespace Tic_tac_toe
             XCount.Text = $"X : {xCount}";
             var oCount = TicTacToe.GetInstance().PlayerOWinCount;
             OCount.Text = $"O : {oCount}";
+        }
+
+        public DialogResult GetEndGameMessage(MapValues winner)
+        {
+            DialogResult result = MessageBox.Show($"Player {winner} win!\rDo you want to continue round?",
+            "The End",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.None,
+            MessageBoxDefaultButton.Button1,
+            MessageBoxOptions.DefaultDesktopOnly);
+            return result;
         }
         private void NewGameClick(object sender, EventArgs e)
         {

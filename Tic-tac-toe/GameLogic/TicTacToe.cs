@@ -128,12 +128,7 @@ namespace Tic_tac_toe.Properties
             if (sum == mapSize)
             {
                 var winner = Turn ? MapValues.O : MapValues.X;
-                DialogResult result = MessageBox.Show($"Player {winner} win!\rDo you want to continue round?",
-                    "The End",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.None,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.DefaultDesktopOnly);
+                var result = MainWindow.GetInstance().GetEndGameMessage(winner);
                 if (result == DialogResult.Yes)
                 {
                     if (winner == MapValues.X)
