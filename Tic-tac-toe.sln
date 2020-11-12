@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tic-tac-toe", "Tic-tac-toe\Tic-tac-toe.csproj", "{B4AB067D-6E18-42EC-A580-F92138AAC52A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPITicTacToe", "WebAPITicTacToe\WebAPITicTacToe.csproj", "{AB314BBB-1A21-497D-B689-765C54AE941F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "WebAPITicTacToe\API.csproj", "{AB314BBB-1A21-497D-B689-765C54AE941F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{F9F1CB79-7247-428A-B7CE-10E0F0B8BD33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AB314BBB-1A21-497D-B689-765C54AE941F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB314BBB-1A21-497D-B689-765C54AE941F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB314BBB-1A21-497D-B689-765C54AE941F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9F1CB79-7247-428A-B7CE-10E0F0B8BD33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F1CB79-7247-428A-B7CE-10E0F0B8BD33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F1CB79-7247-428A-B7CE-10E0F0B8BD33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F1CB79-7247-428A-B7CE-10E0F0B8BD33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
