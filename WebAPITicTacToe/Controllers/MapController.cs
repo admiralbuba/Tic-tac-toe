@@ -21,33 +21,38 @@ namespace WebAPITicTacToe.Controllers
         {
             db = context;
         }
-        // GET: api/<ButtonsInfoController>
+        // GET: api/<MapController>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ButtonInfo>>> Get()
         {
             return await db.Map.ToListAsync();
         }
 
-        // GET api/<ButtonsInfoController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // PATCH api/<MapController>/A00
+        [HttpPatch]
+        public IActionResult Patch(ButtonInfo buttonInfo)
         {
-            return "value";
+            try
+            {
+                var button = db.Map.FirstOrDefault(x => x.Id == buttonInfo.Id);
+                button.Value = buttonInfo.Value;
+                db.SaveChanges();
+                return StatusCode(204);
+            }
+            catch
+            {
+                return StatusCode(403);
+            }
+
         }
 
-        // POST api/<ButtonsInfoController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ButtonsInfoController>/5
+        // PUT api/<MapController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ButtonsInfoController>/5
+        // DELETE api/<MapController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
