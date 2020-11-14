@@ -30,15 +30,15 @@
     <section>
         <h1 class="game--title">Tic Tac Toe</h1>
         <div class="game--container">
-            <input onclick="change(this.id)" type="button" id="A00" class="cell" value="X">
-            <input onclick="change(this.id)" type="button" id="A01" class="cell" value="O">
-            <input onclick="change(this.id)" type="button" id="A02" class="cell" value="X">
-            <input onclick="change(this.id)" type="button" id="A10" class="cell" value="X">
-            <input onclick="change(this.id)" type="button" id="A11" class="cell" value="">
-            <input onclick="change(this.id)" type="button" id="A12" class="cell" value="">
-            <input onclick="change(this.id)" type="button" id="A20" class="cell" value="O">
-            <input onclick="change(this.id)" type="button" id="A21" class="cell" value="">
-            <input onclick="change(this.id)" type="button" id="A22" class="cell" value="O">
+            <input onclick="change(this)" type="button" id="A00" class="cell" value="X">
+            <input onclick="change(this)" type="button" id="A01" class="cell" value="O">
+            <input onclick="change(this)" type="button" id="A02" class="cell" value="X">
+            <input onclick="change(this)" type="button" id="B10" class="cell" value="X">
+            <input onclick="change(this)" type="button" id="B11" class="cell" value="">
+            <input onclick="change(this)" type="button" id="B12" class="cell" value="">
+            <input onclick="change(this)" type="button" id="C20" class="cell" value="O">
+            <input onclick="change(this)" type="button" id="C21" class="cell" value="">
+            <input onclick="change(this)" type="button" id="C22" class="cell" value="O">
         </div>
         <p>Дата: @DateTime.Now.ToLongDateString()</p>
         <h2 class="game--status"></h2>
@@ -54,13 +54,26 @@
         </form>
     </div>
     <script type="text/javascript">
-        function change(id) {
-            var btn = document.getElementById(id);
-            btn.value = btn.value == "X" ? "O" : "X"
+        const buttonAction = async (button) => {
+            const response = await fetch('http://localhost:3681/api/map/', {
+                method: 'POST',
+                //mode: 'no-cors',
+                headers: {
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json'
+                },
+                body: button
+            });
         }
-
-        const buttonAction = async () => {
-            const response = await fetch()
+        function change(button) {
+            var btn = document.getElementById(button.id);
+            btn.value = btn.value == "X" ? "O" : "X";  
+            let buttonInfo = {
+                id: button.id,
+                value: button.value
+            }
+            console.log(buttonInfo)
+            buttonAction(buttonInfo);
         }
     </script>
 </body>

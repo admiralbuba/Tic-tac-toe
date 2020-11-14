@@ -32,6 +32,7 @@ namespace WebAPITicTacToe
             services.AddDbContext<TurnsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<WinnersCountContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +47,10 @@ namespace WebAPITicTacToe
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader()
+                                    .WithExposedHeaders("Access-Control-Allow-Origin"));
 
             app.UseEndpoints(endpoints =>
             {
