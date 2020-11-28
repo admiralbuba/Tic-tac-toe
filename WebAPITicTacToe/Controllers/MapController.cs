@@ -50,17 +50,6 @@ namespace WebAPITicTacToe.Controllers
 
         }
 
-        [HttpOptions]
-        public HttpResponseMessage Options()
-        {
-            var resp = new HttpResponseMessage(HttpStatusCode.OK);
-            resp.Headers.Add("Access-Control-Allow-Origin", "GET,PATCH");
-            resp.Headers.Add("Access-Control-Allow-Methods", "GET,PATCH");
-
-            return resp;
-        }
-
-        // PUT api/<MapController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

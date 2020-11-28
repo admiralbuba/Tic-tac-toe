@@ -17,6 +17,7 @@ namespace WebAPITicTacToe
     public class Startup
     {
         public IConfiguration Configuration { get; set; }
+        readonly string MyPolicy = "_myPolicy";
         public Startup(IConfiguration configuration)
         {
             Configuration = new ConfigurationBuilder()
@@ -32,7 +33,16 @@ namespace WebAPITicTacToe
             services.AddDbContext<TurnsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<WinnersCountContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyPolicy,
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,14 +57,11 @@ namespace WebAPITicTacToe
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseCors(builder => builder.AllowAnyOrigin()
-                                    .AllowAnyMethod()
-                                    .AllowAnyHeader()
-                                    .WithExposedHeaders("Access-Control-Allow-Origin"));
+            app.UseCors();                                
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers().RequireCors(MyPolicy);
             });
         }
     }
