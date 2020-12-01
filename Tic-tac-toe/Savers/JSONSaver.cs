@@ -10,14 +10,14 @@ namespace Tic_tac_toe
         public static void SaveData()
         {
             var gameInfo = new GameInfo();
-            var buttons = MainWindow.GetInstance().GetAllButtons();
+            var buttons = MainWindow.Instance.GetAllButtons();
             foreach (var button in buttons)
             {
                 gameInfo.ButtonInfos.Add(new ButtonInfo() { 
                     Id = button.Name, 
                     Value = button.Text });
             }
-            TicTacToe.GetInstance().PutMapInfoIntoGameInfoObject(gameInfo);
+            TicTacToe.Instance.PutMapInfoIntoGameInfoObject(gameInfo);
             File.WriteAllText(Utils.directoryPath + "info.json", JsonConvert.SerializeObject(gameInfo));
         }
 
@@ -26,12 +26,12 @@ namespace Tic_tac_toe
             var gameInfo = JsonConvert.DeserializeObject<GameInfo>(File.ReadAllText(Utils.directoryPath + "info.json"));
             foreach (var item in gameInfo.ButtonInfos)
             {
-                MainWindow.GetInstance().SetButtonText(item.Id, item.Value);
-                TicTacToe.GetInstance().SetInArray(item.Id);
+                MainWindow.Instance.SetButtonText(item.Id, item.Value);
+                TicTacToe.Instance.SetInArray(item.Id, item.Value);
             }
-            TicTacToe.GetInstance().GetMapInfoFromGameInfoObject(gameInfo);
-            MainWindow.GetInstance().UpdateMainWindowsLabels();
-            TicTacToe.GetInstance().CheckForWinner();
+            TicTacToe.Instance.GetMapInfoFromGameInfoObject(gameInfo);
+            MainWindow.Instance.UpdateMainWindowsLabels();
+            TicTacToe.Instance.CheckForWinner();
         }
     }
 }

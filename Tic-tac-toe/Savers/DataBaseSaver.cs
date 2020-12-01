@@ -33,7 +33,7 @@ namespace Tic_tac_toe
 
             foreach (var item in map)
             {
-                var value = MainWindow.GetInstance().GetButtonText(item.Id);
+                var value = MainWindow.Instance.GetButtonText(item.Id);
                 item.Value = String.IsNullOrEmpty(value) ? null : value;
             }
             db.SubmitChanges();
@@ -80,14 +80,14 @@ namespace Tic_tac_toe
         {
             var values = new WinnersCount
             {
-                PlayerXWinCount = TicTacToe.GetInstance().PlayerXWinCount,
-                PlayerOWinCount = TicTacToe.GetInstance().PlayerOWinCount
+                PlayerXWinCount = TicTacToe.Instance.PlayerXWinCount,
+                PlayerOWinCount = TicTacToe.Instance.PlayerOWinCount
             };
             winnersCounts.InsertOnSubmit(values);
         }
         private static void InsertTurns(Table<Turns> turns)
         {
-            var values = new Turns { Turn = TicTacToe.GetInstance().Turn, TurnCount = TicTacToe.GetInstance().TurnCount };
+            var values = new Turns { Turn = TicTacToe.Instance.Turn, TurnCount = TicTacToe.Instance.TurnCount };
             turns.InsertOnSubmit(values);
         }
         private static void GetMap(DataContext db)
@@ -96,8 +96,8 @@ namespace Tic_tac_toe
 
             foreach (var item in map)
             {
-                MainWindow.GetInstance().SetButtonText(item.Id, item.Value);
-                TicTacToe.GetInstance().SetInArray(item.Id);
+                MainWindow.Instance.SetButtonText(item.Id, item.Value);
+                TicTacToe.Instance.SetInArray(item.Id, item?.Value ?? "Null");
             }
         }
         private static void GetTurns(DataContext db)
@@ -105,20 +105,20 @@ namespace Tic_tac_toe
             Table<Turns> turns = db.GetTable<Turns>();
             foreach (var item in turns)
             {
-                TicTacToe.GetInstance().Turn = item.Turn;
-                TicTacToe.GetInstance().TurnCount = item.TurnCount;
+                TicTacToe.Instance.Turn = item.Turn;
+                TicTacToe.Instance.TurnCount = item.TurnCount;
             }
-            MainWindow.GetInstance().UpdateTurnLabel();
+            MainWindow.Instance.UpdateTurnLabel();
         }
         private static void GetWinnersCount(DataContext db)
         {
             Table<WinnersCount> turns = db.GetTable<WinnersCount>();
             foreach (var item in turns)
             {
-                TicTacToe.GetInstance().PlayerXWinCount = item.PlayerXWinCount;
-                TicTacToe.GetInstance().PlayerOWinCount = item.PlayerOWinCount;
+                TicTacToe.Instance.PlayerXWinCount = item.PlayerXWinCount;
+                TicTacToe.Instance.PlayerOWinCount = item.PlayerOWinCount;
             }
-            MainWindow.GetInstance().UpdateWinnerLabel();
+            MainWindow.Instance.UpdateWinnerLabel();
         }
     }
 }

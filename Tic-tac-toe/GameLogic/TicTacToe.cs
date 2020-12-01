@@ -1,11 +1,12 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Tic_tac_toe.Models;
 
 namespace Tic_tac_toe.Properties
 {
     class TicTacToe
     {
-        private static TicTacToe Instance;
+        private static TicTacToe instance;
         public bool Turn { get; set; }
         public int TurnCount { get; set; }
         public byte PlayerXWinCount { get; set; }
@@ -19,20 +20,20 @@ namespace Tic_tac_toe.Properties
             TurnCount = 0;
             Map = new MapValues[mapSize, mapSize];
         }
-        public static TicTacToe GetInstance() => Instance ??= new TicTacToe();
+        public static TicTacToe Instance => instance ??= new TicTacToe();
         public void ResetGame()
         {
             ResetMap();
             PlayerXWinCount = 0;
             PlayerOWinCount = 0;
-            MainWindow.GetInstance().UpdateWinnerLabel();
+            MainWindow.Instance.UpdateWinnerLabel();
         }
         private void ResetMap()
         {
             Turn = true;
             TurnCount = 0;
             Map = new MapValues[mapSize, mapSize];
-            MainWindow.GetInstance().ChangeTurnLabel(MapValues.X);
+            MainWindow.Instance.ChangeTurnLabel(MapValues.X);
         }
         public void MakeTurn(object sender)
         {
@@ -41,13 +42,13 @@ namespace Tic_tac_toe.Properties
             {
                 button.Text = "X";
                 ArrayHelper.PutValuesInMap(Map, button, MapValues.X);
-                MainWindow.GetInstance().ChangeTurnLabel(MapValues.O);
+                MainWindow.Instance.ChangeTurnLabel(MapValues.O);
             }
             else
             {
                 button.Text = "O";
                 ArrayHelper.PutValuesInMap(Map, button, MapValues.O);
-                MainWindow.GetInstance().ChangeTurnLabel(MapValues.X);
+                MainWindow.Instance.ChangeTurnLabel(MapValues.X);
             }
             button.Enabled = false;
             Turn = !Turn;
@@ -63,12 +64,9 @@ namespace Tic_tac_toe.Properties
             CheckForHorizontalAndVerticalWinner();
             CheckForDiagonalWinner();
         }
-        public void SetInArray(string name)
+        public void SetInArray(string id, string value)
         {
-            if (MainWindow.GetInstance().GetButtonText(name) == "X")
-                ArrayHelper.PutValuesInMap(Map, MainWindow.GetInstance().GetButton(name), MapValues.X);
-            if (MainWindow.GetInstance().GetButtonText(name) == "O")
-                ArrayHelper.PutValuesInMap(Map, MainWindow.GetInstance().GetButton(name), MapValues.O);
+            ArrayHelper.PutValuesInMap(Map, MainWindow.Instance.GetButton(id), (MapValues)Enum.Parse(typeof(MapValues), value));
 
         }
         public void PutMapInfoIntoGameInfoObject(GameInfo gameInfo)
@@ -128,29 +126,29 @@ namespace Tic_tac_toe.Properties
             if (sum == mapSize)
             {
                 var winner = Turn ? MapValues.O : MapValues.X;
-                var result = MainWindow.GetInstance().GetEndGameMessage(winner);
+                var result = MainWindow.Instance.GetEndGameMessage(winner);
                 if (result == DialogResult.Yes)
                 {
                     if (winner == MapValues.X)
                     {
                         PlayerXWinCount++;
-                        MainWindow.GetInstance().UpdateWinnerLabel();
+                        MainWindow.Instance.UpdateWinnerLabel();
                     }
                     if (winner == MapValues.O)
                     {
                         PlayerOWinCount++;
-                        MainWindow.GetInstance().UpdateWinnerLabel();
+                        MainWindow.Instance.UpdateWinnerLabel();
                     }
                     ResetMap();
-                    MainWindow.GetInstance().ReleaseButtons();
+                    MainWindow.Instance.ReleaseButtons();
                 }
                 else
                 {
                     ResetGame();
-                    MainWindow.GetInstance().ReleaseButtons();
+                    MainWindow.Instance.ReleaseButtons();
                 }
-                    //MainWindow.GetInstance().DisableAllButtons();
-                    isVictory = true;                
+                //MainWindow.Instance.DisableAllButtons();
+                isVictory = true;
             }
         }
     }

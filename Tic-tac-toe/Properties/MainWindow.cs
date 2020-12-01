@@ -9,15 +9,15 @@ namespace Tic_tac_toe
 {
     public partial class MainWindow : Form
     {
-        private static MainWindow Instance;
+        private static MainWindow instance;
         private MainWindow()
         {
             InitializeComponent();
         }
-        public static MainWindow GetInstance() => Instance ??= new MainWindow();
+        public static MainWindow Instance => instance ??= new MainWindow();
         private void ButtonClick(object sender, EventArgs e)
         {
-            TicTacToe.GetInstance().MakeTurn(sender);
+            TicTacToe.Instance.MakeTurn(sender);
         }
         public void DisableAllButtons()
         {
@@ -56,16 +56,16 @@ namespace Tic_tac_toe
         }
         public void UpdateTurnLabel()
         {
-            if (TicTacToe.GetInstance().Turn)
+            if (TicTacToe.Instance.Turn)
                 PlayerLable.Text = $"Turn now: PLayer X";
             else
                 PlayerLable.Text = $"Turn now: PLayer O";
         }
         public void UpdateWinnerLabel()
         {
-            var xCount = TicTacToe.GetInstance().PlayerXWinCount;
+            var xCount = TicTacToe.Instance.PlayerXWinCount;
             XCount.Text = $"X : {xCount}";
-            var oCount = TicTacToe.GetInstance().PlayerOWinCount;
+            var oCount = TicTacToe.Instance.PlayerOWinCount;
             OCount.Text = $"O : {oCount}";
         }
 
@@ -81,7 +81,7 @@ namespace Tic_tac_toe
         }
         private void NewGameClick(object sender, EventArgs e)
         {
-            TicTacToe.GetInstance().ResetGame();
+            TicTacToe.Instance.ResetGame();
             ReleaseButtons();
         }
         public void ReleaseButtons()

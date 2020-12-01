@@ -17,7 +17,7 @@ namespace Tic_tac_toe
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(MainWindow.GetInstance());
+            Application.Run(MainWindow.Instance);
         }
     }
 }
