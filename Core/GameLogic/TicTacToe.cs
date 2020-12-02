@@ -96,10 +96,9 @@ namespace Core
                 for (int j = 0; j < mapSize; j++)
                 {
                     CheckInMap(i, j, MapValues.X, ref sumXHor);
-                    CheckInMap(j, i, MapValues.X, ref sumXVer); ;
+                    CheckInMap(j, i, MapValues.X, ref sumXVer);
                     CheckInMap(i, j, MapValues.O, ref sumOHor);
                     CheckInMap(j, i, MapValues.O, ref sumOVer);
-
                 }
             }
         }

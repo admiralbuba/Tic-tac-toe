@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Core.Models;
 using WebAPITicTacToe.Models;
 using Core;
+using Browser.LogicTransfer;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -43,8 +44,8 @@ namespace WebAPITicTacToe.Controllers
                 var button = db.Map.FirstOrDefault(x => x.Id == buttonInfo.Id);
                 button.Value = buttonInfo.Value;
                 db.SaveChanges();
-                //TicTacToe.Instance.MakeTurn(buttonInfo.Id, buttonInfo.Value, );
-                return StatusCode(204);
+                TicTacToe.Instance.MakeTurn(buttonInfo.Id, buttonInfo.Value, LogicTransfer.Instance);
+                return Ok(LogicTransfer.Instance.GameStateJson);
             }
             catch
             {

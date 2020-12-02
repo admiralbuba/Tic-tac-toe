@@ -18,9 +18,9 @@ namespace Browser.LogicTransfer
         }
         public object GetEndGameMessage(MapValues winner)
         {
-            GameStateJson.EndGame.CurrentWinner = winner;
+            GameStateJson.EndGame.CurrentWinner = winner.ToString();
             GameStateJson.EndGame.ShowEndGameMessage = true;
-            return GameStateJson;
+            return "Yes";
         }
 
         public void ReleaseButtons()
@@ -43,10 +43,8 @@ namespace Browser.LogicTransfer
 
         public void UpdateWinnerLabel()
         {
-            var xCount = TicTacToe.Instance.PlayerXWinCount;
-            GameStateJson.WinnerLabels.XWins = xCount;
-            var oCount = TicTacToe.Instance.PlayerOWinCount;
-            GameStateJson.WinnerLabels.XWins = oCount;
+            GameStateJson.WinnerLabels.XWins = TicTacToe.Instance.PlayerXWinCount;
+            GameStateJson.WinnerLabels.OWins = TicTacToe.Instance.PlayerOWinCount;
         }
     }
 }
