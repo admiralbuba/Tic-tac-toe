@@ -12,8 +12,8 @@ namespace Tic_tac_toe.Properties
         public byte PlayerXWinCount { get; set; }
         public byte PlayerOWinCount { get; set; }
         public MapValues[,] Map { get; set; }
-        private bool isVictory = false;
         private const int mapSize = 3;
+        private ITicTacToe platform;
         public TicTacToe()
         {
             Turn = true;
@@ -26,37 +26,38 @@ namespace Tic_tac_toe.Properties
             ResetMap();
             PlayerXWinCount = 0;
             PlayerOWinCount = 0;
-            MainWindow.Instance.UpdateWinnerLabel();
+            platform.UpdateWinnerLabel();
         }
         private void ResetMap()
         {
             Turn = true;
             TurnCount = 0;
             Map = new MapValues[mapSize, mapSize];
-            MainWindow.Instance.ChangeTurnLabel(MapValues.X);
+            platform.ChangeTurnLabel(MapValues.X);
         }
-        public void MakeTurn(object sender)
+        public void MakeTurn(string name, string value, ITicTacToe platform)
         {
-            Button button = (Button)sender;
+            this.platform = platform;
+
             if (Turn)
             {
-                button.Text = "X";
-                ArrayHelper.PutValuesInMap(Map, button, MapValues.X);
-                MainWindow.Instance.ChangeTurnLabel(MapValues.O);
+                platform.ChangeButtonText(name,"X");
+                ArrayHelper.PutValuesInMap(Map, name, MapValues.X);
+                platform.ChangeTurnLabel(MapValues.O);
             }
             else
             {
-                button.Text = "O";
-                ArrayHelper.PutValuesInMap(Map, button, MapValues.O);
-                MainWindow.Instance.ChangeTurnLabel(MapValues.X);
+                platform.ChangeButtonText(name,"O");
+                ArrayHelper.PutValuesInMap(Map, name, MapValues.O);
+                platform.ChangeTurnLabel(MapValues.X);
             }
-            button.Enabled = false;
+            platform.DisableButton(name);
             Turn = !Turn;
             TurnCount++;
             CheckForWinner();
-            if (TurnCount == 9 && isVictory == false)
+            if (TurnCount == 9)
             {
-                MessageBox.Show("Draw!");
+                platform.ShowDrow();
             }
         }
         public void CheckForWinner()
@@ -66,7 +67,7 @@ namespace Tic_tac_toe.Properties
         }
         public void SetInArray(string id, string value)
         {
-            ArrayHelper.PutValuesInMap(Map, MainWindow.Instance.GetButton(id), (MapValues)Enum.Parse(typeof(MapValues), value));
+            ArrayHelper.PutValuesInMap(Map, platform.GetButton(id), (MapValues)Enum.Parse(typeof(MapValues), value));
 
         }
         public void PutMapInfoIntoGameInfoObject(GameInfo gameInfo)
@@ -126,29 +127,27 @@ namespace Tic_tac_toe.Properties
             if (sum == mapSize)
             {
                 var winner = Turn ? MapValues.O : MapValues.X;
-                var result = MainWindow.Instance.GetEndGameMessage(winner);
+                var result = platform.GetEndGameMessage(winner);
                 if (result == DialogResult.Yes)
                 {
                     if (winner == MapValues.X)
                     {
                         PlayerXWinCount++;
-                        MainWindow.Instance.UpdateWinnerLabel();
+                        platform.UpdateWinnerLabel();
                     }
                     if (winner == MapValues.O)
                     {
                         PlayerOWinCount++;
-                        MainWindow.Instance.UpdateWinnerLabel();
+                        platform.UpdateWinnerLabel();
                     }
                     ResetMap();
-                    MainWindow.Instance.ReleaseButtons();
+                    platform.ReleaseButtons();
                 }
                 else
                 {
                     ResetGame();
-                    MainWindow.Instance.ReleaseButtons();
+                    platform.ReleaseButtons();
                 }
-                //MainWindow.Instance.DisableAllButtons();
-                isVictory = true;
             }
         }
     }

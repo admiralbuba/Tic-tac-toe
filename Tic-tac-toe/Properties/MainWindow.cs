@@ -7,7 +7,7 @@ using Tic_tac_toe.Savers;
 
 namespace Tic_tac_toe
 {
-    public partial class MainWindow : Form
+    public partial class MainWindow : Form, ITicTacToe
     {
         private static MainWindow instance;
         private MainWindow()
@@ -17,7 +17,8 @@ namespace Tic_tac_toe
         public static MainWindow Instance => instance ??= new MainWindow();
         private void ButtonClick(object sender, EventArgs e)
         {
-            TicTacToe.Instance.MakeTurn(sender);
+            var button = (Button)sender;
+            TicTacToe.Instance.MakeTurn(button.Name, button.Text, MainWindow.Instance);
         }
         public void DisableAllButtons()
         {
@@ -26,9 +27,9 @@ namespace Tic_tac_toe
                 button.Enabled = false;
             }
         }
-        public Button GetButton(string name)
+        public string GetButton(string name)
         {
-            return Controls.OfType<Button>().Where(x => x.Name.ToString() == name).FirstOrDefault();
+            return Controls.OfType<Button>().Where(x => x.Name.ToString() == name).FirstOrDefault().Name;
         }
         public List<Button> GetAllButtons()
         {
@@ -78,6 +79,18 @@ namespace Tic_tac_toe
             MessageBoxDefaultButton.Button1,
             MessageBoxOptions.DefaultDesktopOnly);
             return result;
+        }
+        public void ShowDrow()
+        {
+            MessageBox.Show("Draw!");
+        }
+        public void DisableButton(string name)
+        {
+            Controls.OfType<Button>().Where(x => x.Name.ToString() == name).FirstOrDefault().Enabled = false;
+        }
+        public void ChangeButtonText(string name, string value)
+        {
+            Controls.OfType<Button>().Where(x => x.Name.ToString() == name).FirstOrDefault().Text = value;
         }
         private void NewGameClick(object sender, EventArgs e)
         {
