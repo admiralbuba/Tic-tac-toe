@@ -116,7 +116,7 @@ namespace Tic_tac_toe
         }
         private void LoadClick(object sender, EventArgs e)
         {
-            SaverLoader.GetData();
+            SaverLoader.GetData(MainWindow.instance);
         }
         private void SettingsClick(object sender, EventArgs e)
         {

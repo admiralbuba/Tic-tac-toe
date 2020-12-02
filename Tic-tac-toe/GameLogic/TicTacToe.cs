@@ -4,7 +4,7 @@ using Tic_tac_toe.Models;
 
 namespace Tic_tac_toe.Properties
 {
-    class TicTacToe
+    public class TicTacToe
     {
         private static TicTacToe instance;
         public bool Turn { get; set; }

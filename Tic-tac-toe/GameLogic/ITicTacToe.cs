@@ -3,7 +3,7 @@ using Tic_tac_toe.Models;
 
 namespace Tic_tac_toe.Properties
 {
-    interface ITicTacToe
+    public interface ITicTacToe
     {
         void ChangeTurnLabel(MapValues mapValues);
         void UpdateWinnerLabel();
@@ -13,5 +13,7 @@ namespace Tic_tac_toe.Properties
         string GetButton(string id);
         void DisableButton(string name);
         void ChangeButtonText(string name, string value);
+        void UpdateTurnLabel();
+        void SetButtonText(string id, string value);
     }
 }

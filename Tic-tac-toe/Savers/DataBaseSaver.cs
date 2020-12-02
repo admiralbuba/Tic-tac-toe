@@ -9,13 +9,13 @@ namespace Tic_tac_toe
     public static class DataBaseSaver
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        public static void GetData()
+        public static void GetData(ITicTacToe platform)
         {
             using (DataContext db = new DataContext(connectionString))
             {
-                GetMap(db);
-                GetTurns(db);
-                GetWinnersCount(db);
+                GetMap(db, platform);
+                GetTurns(db, platform);
+                GetWinnersCount(db, platform);
             }
         }
         public static void SaveData()
@@ -90,17 +90,17 @@ namespace Tic_tac_toe
             var values = new Turns { Turn = TicTacToe.Instance.Turn, TurnCount = TicTacToe.Instance.TurnCount };
             turns.InsertOnSubmit(values);
         }
-        private static void GetMap(DataContext db)
+        private static void GetMap(DataContext db, ITicTacToe platform)
         {
             Table<ButtonInfo> map = db.GetTable<ButtonInfo>();
 
             foreach (var item in map)
             {
-                MainWindow.Instance.SetButtonText(item.Id, item.Value);
+                platform.SetButtonText(item.Id, item.Value);
                 TicTacToe.Instance.SetInArray(item.Id, item?.Value ?? "Null");
             }
         }
-        private static void GetTurns(DataContext db)
+        private static void GetTurns(DataContext db, ITicTacToe platform)
         {
             Table<Turns> turns = db.GetTable<Turns>();
             foreach (var item in turns)
@@ -108,9 +108,9 @@ namespace Tic_tac_toe
                 TicTacToe.Instance.Turn = item.Turn;
                 TicTacToe.Instance.TurnCount = item.TurnCount;
             }
-            MainWindow.Instance.UpdateTurnLabel();
+            platform.UpdateTurnLabel();
         }
-        private static void GetWinnersCount(DataContext db)
+        private static void GetWinnersCount(DataContext db, ITicTacToe platform)
         {
             Table<WinnersCount> turns = db.GetTable<WinnersCount>();
             foreach (var item in turns)
@@ -118,7 +118,7 @@ namespace Tic_tac_toe
                 TicTacToe.Instance.PlayerXWinCount = item.PlayerXWinCount;
                 TicTacToe.Instance.PlayerOWinCount = item.PlayerOWinCount;
             }
-            MainWindow.Instance.UpdateWinnerLabel();
+            platform.UpdateWinnerLabel();
         }
     }
 }

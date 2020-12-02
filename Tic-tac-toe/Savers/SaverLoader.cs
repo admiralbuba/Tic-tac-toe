@@ -1,4 +1,6 @@
-﻿namespace Tic_tac_toe.Savers
+﻿using Tic_tac_toe.Properties;
+
+namespace Tic_tac_toe.Savers
 {
     public static class SaverLoader
     {
@@ -15,12 +17,12 @@
                     break;
             };
         }
-        public static void GetData()
+        public static void GetData(ITicTacToe platform)
         {
             switch (setting)
             {
                 case Settings.DataBase:
-                    DataBaseSaver.GetData();
+                    DataBaseSaver.GetData(platform);
                     break;
                 case Settings.JSON:
                     JSONSaver.GetData();
