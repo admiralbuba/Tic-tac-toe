@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.Linq;
-using Tic_tac_toe.Models;
-using Tic_tac_toe.Properties;
+using Core.Models;
+using Core.Properties;
 
-namespace Tic_tac_toe
+namespace Core
 {
     public static class DataBaseSaver
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        public static void GetData(ITicTacToe platform)
+        public static void GetData(ITicTacToe platform, IUIHelper uIHelper = null)
         {
             using (DataContext db = new DataContext(connectionString))
             {
-                GetMap(db, platform);
+                GetMap(db, platform, uIHelper);
                 GetTurns(db, platform);
                 GetWinnersCount(db, platform);
             }
@@ -90,13 +90,13 @@ namespace Tic_tac_toe
             var values = new Turns { Turn = TicTacToe.Instance.Turn, TurnCount = TicTacToe.Instance.TurnCount };
             turns.InsertOnSubmit(values);
         }
-        private static void GetMap(DataContext db, ITicTacToe platform)
+        private static void GetMap(DataContext db, ITicTacToe platform, IUIHelper uIHelper = null)
         {
             Table<ButtonInfo> map = db.GetTable<ButtonInfo>();
 
             foreach (var item in map)
             {
-                platform.SetButtonText(item.Id, item.Value);
+                uIHelper?.SetButtonText(item.Id, item.Value);
                 TicTacToe.Instance.SetInArray(item.Id, item?.Value ?? "Null");
             }
         }

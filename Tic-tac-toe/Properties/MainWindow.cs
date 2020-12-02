@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Tic_tac_toe.Properties;
-using Tic_tac_toe.Savers;
+using Core.Properties;
+using Core.Savers;
 
-namespace Tic_tac_toe
+namespace Core
 {
-    public partial class MainWindow : Form, ITicTacToe
+    public partial class MainWindow : Form, ITicTacToe, IUIHelper
     {
         private static MainWindow instance;
         private MainWindow()
@@ -18,7 +18,7 @@ namespace Tic_tac_toe
         private void ButtonClick(object sender, EventArgs e)
         {
             var button = (Button)sender;
-            TicTacToe.Instance.MakeTurn(button.Name, button.Text, MainWindow.Instance);
+            TicTacToe.Instance.MakeTurn(button.Name, button.Text, MainWindow.Instance, MainWindow.Instance);
         }
         public void DisableAllButtons()
         {
@@ -26,10 +26,6 @@ namespace Tic_tac_toe
             {
                 button.Enabled = false;
             }
-        }
-        public string GetButton(string name)
-        {
-            return Controls.OfType<Button>().Where(x => x.Name.ToString() == name).FirstOrDefault().Name;
         }
         public List<Button> GetAllButtons()
         {
@@ -70,7 +66,7 @@ namespace Tic_tac_toe
             OCount.Text = $"O : {oCount}";
         }
 
-        public DialogResult GetEndGameMessage(MapValues winner)
+        public object GetEndGameMessage(MapValues winner)
         {
             DialogResult result = MessageBox.Show($"Player {winner} win!\rDo you want to continue round?",
             "The End",
@@ -116,7 +112,7 @@ namespace Tic_tac_toe
         }
         private void LoadClick(object sender, EventArgs e)
         {
-            SaverLoader.GetData(MainWindow.instance);
+            SaverLoader.GetData(MainWindow.instance, MainWindow.instance);
         }
         private void SettingsClick(object sender, EventArgs e)
         {

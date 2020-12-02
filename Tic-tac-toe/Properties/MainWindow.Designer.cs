@@ -2,7 +2,7 @@
 using System.Resources;
 using System.Globalization;
 
-namespace Tic_tac_toe
+namespace Core
 {
     partial class MainWindow
     {

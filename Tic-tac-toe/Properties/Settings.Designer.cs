@@ -1,4 +1,4 @@
-﻿namespace Tic_tac_toe.Properties
+﻿namespace Core.Properties
 {
     partial class Settings
     {

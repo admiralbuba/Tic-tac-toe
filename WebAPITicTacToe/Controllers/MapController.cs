@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Tic_tac_toe.Models;
+using Core.Models;
 using WebAPITicTacToe.Models;
+using Core;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,6 +35,7 @@ namespace WebAPITicTacToe.Controllers
 
         // PATCH api/<MapController>/A00
         [HttpPost]
+        [Produces("application/json")]
         public IActionResult Post(ButtonInfo buttonInfo)
         {
             try
@@ -41,6 +43,7 @@ namespace WebAPITicTacToe.Controllers
                 var button = db.Map.FirstOrDefault(x => x.Id == buttonInfo.Id);
                 button.Value = buttonInfo.Value;
                 db.SaveChanges();
+                //TicTacToe.Instance.MakeTurn(buttonInfo.Id, buttonInfo.Value, );
                 return StatusCode(204);
             }
             catch

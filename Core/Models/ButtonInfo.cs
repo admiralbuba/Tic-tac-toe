@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Data.Linq.Mapping;
 
-namespace Tic_tac_toe.Models
+namespace Core.Models
 {
     [Table(Name = "Map")]
     public class ButtonInfo

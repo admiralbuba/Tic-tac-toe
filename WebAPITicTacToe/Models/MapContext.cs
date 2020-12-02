@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Tic_tac_toe.Models;
+using Core.Models;
 
 namespace WebAPITicTacToe.Models
 {

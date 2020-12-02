@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Windows.Forms;
-using Tic_tac_toe.Models;
+using Core.Models;
 
-namespace Tic_tac_toe.Properties
+namespace Core
 {
     public class TicTacToe
     {
@@ -14,6 +13,7 @@ namespace Tic_tac_toe.Properties
         public MapValues[,] Map { get; set; }
         private const int mapSize = 3;
         private ITicTacToe platform;
+        private IUIHelper uIHelper;
         public TicTacToe()
         {
             Turn = true;
@@ -33,25 +33,26 @@ namespace Tic_tac_toe.Properties
             Turn = true;
             TurnCount = 0;
             Map = new MapValues[mapSize, mapSize];
-            platform.ChangeTurnLabel(MapValues.X);
+            uIHelper?.ChangeTurnLabel(MapValues.X);
         }
-        public void MakeTurn(string name, string value, ITicTacToe platform)
+        public void MakeTurn(string name, string value, ITicTacToe platform, IUIHelper uIHelper = null)
         {
             this.platform = platform;
+            this.uIHelper = uIHelper;
 
             if (Turn)
             {
-                platform.ChangeButtonText(name,"X");
+                uIHelper?.ChangeButtonText(name,"X");
                 ArrayHelper.PutValuesInMap(Map, name, MapValues.X);
-                platform.ChangeTurnLabel(MapValues.O);
+                uIHelper?.ChangeTurnLabel(MapValues.O);
             }
             else
             {
-                platform.ChangeButtonText(name,"O");
+                uIHelper?.ChangeButtonText(name,"O");
                 ArrayHelper.PutValuesInMap(Map, name, MapValues.O);
-                platform.ChangeTurnLabel(MapValues.X);
+                uIHelper?.ChangeTurnLabel(MapValues.X);
             }
-            platform.DisableButton(name);
+            uIHelper?.DisableButton(name);
             Turn = !Turn;
             TurnCount++;
             CheckForWinner();
@@ -67,7 +68,7 @@ namespace Tic_tac_toe.Properties
         }
         public void SetInArray(string id, string value)
         {
-            ArrayHelper.PutValuesInMap(Map, platform.GetButton(id), (MapValues)Enum.Parse(typeof(MapValues), value));
+            ArrayHelper.PutValuesInMap(Map, id, (MapValues)Enum.Parse(typeof(MapValues), value));
 
         }
         public void PutMapInfoIntoGameInfoObject(GameInfo gameInfo)
@@ -128,7 +129,7 @@ namespace Tic_tac_toe.Properties
             {
                 var winner = Turn ? MapValues.O : MapValues.X;
                 var result = platform.GetEndGameMessage(winner);
-                if (result == DialogResult.Yes)
+                if (result.ToString() == "Yes")
                 {
                     if (winner == MapValues.X)
                     {

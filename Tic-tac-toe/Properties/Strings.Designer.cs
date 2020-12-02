@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tic_tac_toe.Properties {
+namespace Core.Properties {
     using System;
     
     

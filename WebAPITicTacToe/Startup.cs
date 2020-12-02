@@ -33,6 +33,7 @@ namespace WebAPITicTacToe
             services.AddDbContext<TurnsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<WinnersCountContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+            services.AddMvc().AddNewtonsoftJson();
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyPolicy,

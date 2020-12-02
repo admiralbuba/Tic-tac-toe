@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Tic_tac_toe
+namespace Core
 {
     public partial class About : Form
     {

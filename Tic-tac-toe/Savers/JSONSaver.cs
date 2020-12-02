@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
-using Tic_tac_toe.Models;
-using Tic_tac_toe.Properties;
+using Core.Models;
+using Core.Properties;
 
-namespace Tic_tac_toe
+namespace Core
 {
     public static class JSONSaver
     {

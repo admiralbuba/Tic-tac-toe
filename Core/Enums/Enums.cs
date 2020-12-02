@@ -1,4 +1,4 @@
-﻿namespace Tic_tac_toe
+﻿namespace Core
 {
     public enum MapValues
     {

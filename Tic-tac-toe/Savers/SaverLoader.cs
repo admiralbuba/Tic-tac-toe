@@ -1,6 +1,6 @@
-﻿using Tic_tac_toe.Properties;
+﻿using Core.Properties;
 
-namespace Tic_tac_toe.Savers
+namespace Core.Savers
 {
     public static class SaverLoader
     {
@@ -17,12 +17,12 @@ namespace Tic_tac_toe.Savers
                     break;
             };
         }
-        public static void GetData(ITicTacToe platform)
+        public static void GetData(ITicTacToe platform, IUIHelper uIHelper = null)
         {
             switch (setting)
             {
                 case Settings.DataBase:
-                    DataBaseSaver.GetData(platform);
+                    DataBaseSaver.GetData(platform, uIHelper);
                     break;
                 case Settings.JSON:
                     JSONSaver.GetData();

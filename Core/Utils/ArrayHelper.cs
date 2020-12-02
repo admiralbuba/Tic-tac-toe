@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Windows.Forms;
 
-namespace Tic_tac_toe
+namespace Core
 {
     static class ArrayHelper
     {

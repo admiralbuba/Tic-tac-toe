@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tic_tac_toe
+namespace Core
 {
     public static class Utils
     {

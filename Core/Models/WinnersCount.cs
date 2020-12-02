@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Linq.Mapping;
 using System.Text;
 
-namespace Tic_tac_toe.Models
+namespace Core.Models
 {
     [Table(Name = "WinnerCount")]
     public class WinnersCount

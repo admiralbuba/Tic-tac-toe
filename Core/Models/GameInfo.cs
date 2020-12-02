@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Tic_tac_toe.Models
+namespace Core.Models
 {
     public class GameInfo
     {

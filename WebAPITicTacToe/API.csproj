@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tic-tac-toe\Tic-tac-toe.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Tic-tac-toe\Desktop.csproj" />
   </ItemGroup>
 
 </Project>

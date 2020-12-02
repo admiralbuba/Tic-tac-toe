@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Data.Linq.Mapping;
 
-namespace Tic_tac_toe.Models
+namespace Core.Models
 {
     [Table(Name = "Turns")]
     public class Turns

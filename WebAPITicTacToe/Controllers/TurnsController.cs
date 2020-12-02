@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Tic_tac_toe.Models;
+using Core.Models;
 using WebAPITicTacToe.Models;
 
 namespace WebAPITicTacToe.Controllers
