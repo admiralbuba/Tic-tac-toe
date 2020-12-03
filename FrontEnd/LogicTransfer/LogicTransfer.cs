@@ -20,7 +20,7 @@ namespace Browser.LogicTransfer
         {
             GameState.EndGame.CurrentWinner = winner.ToString();
             GameState.EndGame.ShowEndGameMessage = true;
-            return "Yes";
+            return "No";
         }
 
         public void ReleaseButtons()

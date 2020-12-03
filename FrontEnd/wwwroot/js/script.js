@@ -47,6 +47,15 @@ function change(button) {
 async function checkGame(game) {
     if (game.endGame.showEndGameMessage == true) {
         alert("Player " + game.endGame.currentWinner + " win!")
+        let elements = document.querySelectorAll("input[type=button]");
+        for (var i = 0, len = elements.length; i < len; i++) {
+            elements[i].disabled = false;
+            elements[i].value = "";
+        }
     }
+    $.ajax({
+        url: "http://localhost:3681/api/map",
+        method: "PATCH"
+    })
     pending = false;
 }

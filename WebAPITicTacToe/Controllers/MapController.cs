@@ -34,7 +34,7 @@ namespace WebAPITicTacToe.Controllers
             return await db.Map.ToListAsync();
         }
 
-        // PATCH api/<MapController>/A00
+        // POST api/<MapController>/A00
         [HttpPost]
         [Produces("application/json")]
         public IActionResult Post(ButtonInfo buttonInfo)
@@ -54,9 +54,20 @@ namespace WebAPITicTacToe.Controllers
 
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PATCH api/<MapController>
+        [HttpPatch]
+        public IActionResult Patch()
         {
+            try
+            {
+                LogicTransfer.Instance.GameState.EndGame.CurrentWinner = null;
+                LogicTransfer.Instance.GameState.EndGame.ShowEndGameMessage = false;
+                return StatusCode(200);
+            }
+            catch
+            {
+                return StatusCode(403);
+            }
         }
 
         // DELETE api/<MapController>/5
