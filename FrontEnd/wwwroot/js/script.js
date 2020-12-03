@@ -34,15 +34,15 @@ function change(button) {
     }
     var btn = document.getElementById(button.id);
     btn.value = turn ? "X" : "O";
-    turn = !turn;
-    document.getElementById("turnLabel").textContent = turn ? "Turn now: PLayer X" : "Turn now: PLayer O";
     btn.disabled = true;
+    turn = !turn;
     let buttonInfo = {
         id: button.id,
         value: button.value
     }
     pending = true;
     buttonAction(buttonInfo);
+    document.getElementById("turnLabel").textContent = turn ? "Turn now: PLayer X" : "Turn now: PLayer O";
 }
 
 async function checkGame(game) {
@@ -66,10 +66,10 @@ async function checkGame(game) {
             document.getElementById("X").textContent = 'X : 0';
             document.getElementById("O").textContent = 'O : 0';
         } else {
-            let currentWinnerCount = turn ? game.winnersCount.playerXWinCount : game.winnersCount.playerOWinCount;
-            document.getElementById(game.endGame.currentWinner).textContent = game.endGame.currentWinner + ' : ' + currentWinnerCount;
+            let currentWinnerCount = turn ? game.winnersCount.playerOWinCount : game.winnersCount.playerXWinCount;
+            document.getElementById(game.endGame.currentWinner).textContent = `${game.endGame.currentWinner} : ${currentWinnerCount}`;
+            turn = true;
         }
-        turn = true;
     }
     pending = false;
 }
