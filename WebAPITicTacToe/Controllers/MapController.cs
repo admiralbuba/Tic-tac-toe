@@ -45,7 +45,7 @@ namespace WebAPITicTacToe.Controllers
                 button.Value = buttonInfo.Value;
                 db.SaveChanges();
                 TicTacToe.Instance.MakeTurn(buttonInfo.Id, buttonInfo.Value, LogicTransfer.Instance);
-                return Ok(LogicTransfer.Instance.GameStateJson);
+                return Ok(LogicTransfer.Instance.GameState);
             }
             catch
             {

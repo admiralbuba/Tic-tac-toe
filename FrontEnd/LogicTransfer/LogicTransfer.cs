@@ -11,40 +11,40 @@ namespace Browser.LogicTransfer
     {
         private static LogicTransfer instance;
         public static LogicTransfer Instance => instance ??= new LogicTransfer();
-        public GameState GameStateJson { get; set; }
+        public GameState GameState { get; set; }
         private LogicTransfer()
         {
-            GameStateJson = new GameState();
+            GameState = new GameState();
         }
         public object GetEndGameMessage(MapValues winner)
         {
-            GameStateJson.EndGame.CurrentWinner = winner.ToString();
-            GameStateJson.EndGame.ShowEndGameMessage = true;
+            GameState.EndGame.CurrentWinner = winner.ToString();
+            GameState.EndGame.ShowEndGameMessage = true;
             return "Yes";
         }
 
         public void ReleaseButtons()
         {
-            GameStateJson.ReleaseButtons = true;
+            GameState.ReleaseButtons = true;
         }
 
         public void ShowDrow()
         {
-            GameStateJson.ShowDrow = true;
+            GameState.ShowDrow = true;
         }
 
         public void UpdateTurnLabel()
         {
             if (TicTacToe.Instance.Turn)
-                GameStateJson.CurrentTurn = "X";
+                GameState.CurrentTurn = "X";
             else
-                GameStateJson.CurrentTurn = "O";
+                GameState.CurrentTurn = "O";
         }
 
         public void UpdateWinnerLabel()
         {
-            GameStateJson.WinnerLabels.XWins = TicTacToe.Instance.PlayerXWinCount;
-            GameStateJson.WinnerLabels.OWins = TicTacToe.Instance.PlayerOWinCount;
+            GameState.WinnerLabels.XWins = TicTacToe.Instance.PlayerXWinCount;
+            GameState.WinnerLabels.OWins = TicTacToe.Instance.PlayerOWinCount;
         }
     }
 }
