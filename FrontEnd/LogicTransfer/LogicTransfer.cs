@@ -20,7 +20,7 @@ namespace Browser.LogicTransfer
         {
             GameState.EndGame.CurrentWinner = winner.ToString();
             GameState.EndGame.ShowEndGameMessage = true;
-            return "No";
+            return "Yes";
         }
 
         public void ReleaseButtons()
@@ -43,8 +43,8 @@ namespace Browser.LogicTransfer
 
         public void UpdateWinnerLabel()
         {
-            GameState.WinnerLabels.XWins = TicTacToe.Instance.PlayerXWinCount;
-            GameState.WinnerLabels.OWins = TicTacToe.Instance.PlayerOWinCount;
+            GameState.WinnersCount.PlayerXWinCount = TicTacToe.Instance.PlayerXWinCount;
+            GameState.WinnersCount.PlayerOWinCount = TicTacToe.Instance.PlayerOWinCount;
         }
     }
 }

@@ -35,6 +35,7 @@ function change(button) {
     var btn = document.getElementById(button.id);
     btn.value = turn ? "X" : "O";
     turn = !turn;
+    document.getElementById("turnLabel").textContent = turn ? "Turn now: PLayer X" : "Turn now: PLayer O";
     btn.disabled = true;
     let buttonInfo = {
         id: button.id,
@@ -52,10 +53,23 @@ async function checkGame(game) {
             elements[i].disabled = false;
             elements[i].value = "";
         }
+        document.getElementById("turnLabel").textContent = "Turn now: PLayer X";
+        $.ajax({
+            url: "http://localhost:3681/api/map",
+            method: "PATCH"
+        })
+        if (!confirm('Do you want to continue round?')) {
+            $.ajax({
+                url: "http://localhost:3681/api/WinnersCount",
+                method: "PATCH"
+            })
+            document.getElementById("X").textContent = 'X : 0';
+            document.getElementById("O").textContent = 'O : 0';
+        } else {
+            let currentWinnerCount = turn ? game.winnersCount.playerXWinCount : game.winnersCount.playerOWinCount;
+            document.getElementById(game.endGame.currentWinner).textContent = game.endGame.currentWinner + ' : ' + currentWinnerCount;
+        }
+        turn = true;
     }
-    $.ajax({
-        url: "http://localhost:3681/api/map",
-        method: "PATCH"
-    })
     pending = false;
 }

@@ -7,10 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Core.Models;
 using WebAPITicTacToe.Models;
+using Browser.LogicTransfer;
+using Microsoft.AspNetCore.Cors;
+using Core;
 
 namespace WebAPITicTacToe.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowOrigin")]
     [ApiController]
     public class WinnersCountController : ControllerBase
     {
@@ -25,6 +29,22 @@ namespace WebAPITicTacToe.Controllers
         public async Task<ActionResult<IEnumerable<WinnersCount>>> Get()
         {
             return await db.WinnerCount.ToListAsync();
+        }
+        // PATCH: api/<WinnersCountController>
+        [HttpPatch]
+        public IActionResult Patch()
+        {
+            try
+            {
+                TicTacToe.Instance.ResetGame();
+                LogicTransfer.Instance.GameState.WinnersCount.PlayerOWinCount = 0;
+                LogicTransfer.Instance.GameState.WinnersCount.PlayerXWinCount = 0;
+                return StatusCode(200);
+            }
+            catch
+            {
+                return StatusCode(403);
+            }
         }
     }
 }
