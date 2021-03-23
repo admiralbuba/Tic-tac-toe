@@ -17,7 +17,7 @@ namespace Core
         public static MainWindow Instance => instance ??= new MainWindow();
         private void ButtonClick(object sender, EventArgs e)
         {
-            var button = (Button)sender;
+            var button = sender as Button;
             TicTacToe.Instance.MakeTurn(button.Name, button.Text, MainWindow.Instance, MainWindow.Instance);
         }
         public void DisableAllButtons()

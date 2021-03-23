@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -11,21 +8,25 @@ using Core.Models;
 using WebAPITicTacToe.Models;
 using Core;
 using Browser.LogicTransfer;
+using Microsoft.AspNetCore.SignalR;
+using API.Hubs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebAPITicTacToe.Controllers
 {
     [Route("api/[controller]")]
-    [EnableCors("AllowOrigin")]
+    [EnableCors("MyPolicy")]
     [ApiController]
     public class MapController : ControllerBase
     {
+        IHubContext<GameStateHub> hubContext;
         MapContext db;
 
-        public MapController(MapContext context)
+        public MapController(MapContext context, IHubContext<GameStateHub> hubContext)
         {
             db = context;
+            this.hubContext = hubContext; 
         }
         // GET: api/<MapController>
         [HttpGet]
@@ -37,7 +38,7 @@ namespace WebAPITicTacToe.Controllers
         // POST api/<MapController>/A00
         [HttpPost]
         [Produces("application/json")]
-        public IActionResult Post(ButtonInfo buttonInfo)
+        public async Task<IActionResult> Post(ButtonInfo buttonInfo)
         {
             try
             {
@@ -45,6 +46,7 @@ namespace WebAPITicTacToe.Controllers
                 button.Value = buttonInfo.Value;
                 db.SaveChanges();
                 TicTacToe.Instance.MakeTurn(buttonInfo.Id, buttonInfo.Value, LogicTransfer.Instance);
+                await hubContext.Clients.All.SendAsync("ChangeButton", buttonInfo);
                 return Ok(LogicTransfer.Instance.GameState);
             }
             catch

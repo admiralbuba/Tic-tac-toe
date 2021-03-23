@@ -14,7 +14,7 @@ using Core;
 namespace WebAPITicTacToe.Controllers
 {
     [Route("api/[controller]")]
-    [EnableCors("AllowOrigin")]
+    [EnableCors("MyPolicy")]
     [ApiController]
     public class WinnersCountController : ControllerBase
     {

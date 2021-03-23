@@ -1,75 +1,106 @@
 ﻿var script = document.createElement('script');
-script.src = '//code.jquery.com/jquery-3.5.1.min.js';
-document.getElementsByTagName('head')[0].appendChild(script);  
+script.src = '//code.jquery.com/jquery-3.5.1.min.js'; 
+document.getElementsByTagName('head')[0].appendChild(script);
 
 let turn = true;
 let gameState;
 let i = 0;
 let pending = false;
-async function buttonAction(button) {
-    let data = await fetch('http://localhost:3681/api/map/', {
-        method: 'POST',
-        headers: {
-            'Accept': '*/*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(button)
+
+//let hubConnection = new signalR.HubConnectionBuilder()
+//    .withUrl("http://localhost:3681/gamestate", { transport: signalR.HttpTransportType.WebSockets })
+//    .configureLogging(signalR.LogLevel.Information)
+//    .build()
+//hubConnection.start({ withCredentials: false })
+//    .then(res => {
+//        console.log('connection started');
+//    })
+//    .catch(err => {
+//        console.error((err));
+//    })
+let hubConnection = new signalR.HubConnectionBuilder()
+    .withUrl("http://localhost:3681/gamestate", {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets
     })
-    i++;
-    console.log(i);
-    console.log("before await");
-    var gameState = await data.json();
-    console.log(gameState);
-    await checkGame(gameState);
-    console.log("after check");
+    .build();
 
-    $(function () {
-        $.getScript("http://localhost:3681/api/turns/");
-    });
-}
-
-function change(button) {
-    if (pending) {
-        return;
-    }
+ //получение сообщения от сервера
+hubConnection.on('ChangeButton', function (button) {
     var btn = document.getElementById(button.id);
     btn.value = turn ? "X" : "O";
     btn.disabled = true;
-    turn = !turn;
-    let buttonInfo = {
-        id: button.id,
-        value: button.value
-    }
-    pending = true;
-    buttonAction(buttonInfo);
-    document.getElementById("turnLabel").textContent = turn ? "Turn now: PLayer X" : "Turn now: PLayer O";
-}
+        });
+    // hubConnection.start({ withCredentials: false });
+    hubConnection.start();
 
-async function checkGame(game) {
-    if (game.endGame.showEndGameMessage == true) {
-        alert("Player " + game.endGame.currentWinner + " win!")
-        let elements = document.querySelectorAll("input[type=button]");
-        for (var i = 0, len = elements.length; i < len; i++) {
-            elements[i].disabled = false;
-            elements[i].value = "";
-        }
-        document.getElementById("turnLabel").textContent = "Turn now: PLayer X";
-        $.ajax({
-            url: "http://localhost:3681/api/map",
-            method: "PATCH"
+
+    async function buttonAction(button) {
+        let data = await fetch('http://localhost:3681/api/map/', {
+            method: 'POST',
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(button)
         })
-        if (!confirm('Do you want to continue round?')) {
+        i++;
+        console.log(i);
+        console.log("before await");
+        var gameState = await data.json();
+        console.log(gameState);
+        await checkGame(gameState);
+        console.log("after check");
+
+        $(function () {
+            $.getScript("http://localhost:3681/api/turns/");
+        });
+    }
+
+    function change(button) {
+        if (pending) {
+            return;
+        }
+        var btn = document.getElementById(button.id);
+        btn.value = turn ? "X" : "O";
+        btn.disabled = true;
+        turn = !turn;
+        let buttonInfo = {
+            id: button.id,
+            value: button.value
+        }
+        pending = true;
+        buttonAction(buttonInfo);
+        document.getElementById("turnLabel").textContent = turn ? "Turn now: PLayer X" : "Turn now: PLayer O";
+    }
+
+    async function checkGame(game) {
+        if (game.endGame.showEndGameMessage == true) {
+            alert("Player " + game.endGame.currentWinner + " win!")
+            let elements = document.querySelectorAll("input[type=button]");
+            for (var i = 0, len = elements.length; i < len; i++) {
+                elements[i].disabled = false;
+                elements[i].value = "";
+            }
+            document.getElementById("turnLabel").textContent = "Turn now: PLayer X";
             $.ajax({
-                url: "http://localhost:3681/api/WinnersCount",
+                url: "http://localhost:3681/api/map",
                 method: "PATCH"
             })
-            document.getElementById("X").textContent = 'X : 0';
-            document.getElementById("O").textContent = 'O : 0';
-        } else {
-            let currentWinnerCount = turn ? game.winnersCount.playerOWinCount : game.winnersCount.playerXWinCount;
-            document.getElementById(game.endGame.currentWinner).textContent = `${game.endGame.currentWinner} : ${currentWinnerCount}`;
-            turn = true;
+            if (!confirm('Do you want to continue round?')) {
+                $.ajax({
+                    url: "http://localhost:3681/api/WinnersCount",
+                    method: "PATCH"
+                })
+                document.getElementById("X").textContent = 'X : 0';
+                document.getElementById("O").textContent = 'O : 0';
+                turn = true
+            } else {
+                let currentWinnerCount = turn ? game.winnersCount.playerOWinCount : game.winnersCount.playerXWinCount;
+                document.getElementById(game.endGame.currentWinner).textContent = `${game.endGame.currentWinner} : ${currentWinnerCount}`;
+                turn = true;
+            }
         }
+        pending = false;
     }
-    pending = false;
-}
+

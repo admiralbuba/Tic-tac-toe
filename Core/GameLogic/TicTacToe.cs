@@ -26,7 +26,7 @@ namespace Core
             ResetMap();
             PlayerXWinCount = 0;
             PlayerOWinCount = 0;
-            platform.UpdateWinnerLabel();
+            platform?.UpdateWinnerLabel();
         }
         private void ResetMap()
         {
@@ -58,7 +58,7 @@ namespace Core
             CheckForWinner();
             if (TurnCount == 9)
             {
-                platform.ShowDrow();
+                platform?.ShowDrow();
             }
         }
         public void CheckForWinner()
@@ -84,6 +84,10 @@ namespace Core
             TurnCount = gameInfo.Turns.TurnCount;
             PlayerXWinCount = gameInfo.WinnersCount.PlayerXWinCount;
             PlayerOWinCount = gameInfo.WinnersCount.PlayerOWinCount;
+        }
+        public void SetNullToPlatform()
+        {
+            platform = null;
         }
         private void CheckForHorizontalAndVerticalWinner()
         {
@@ -127,26 +131,26 @@ namespace Core
             if (sum == mapSize)
             {
                 var winner = Turn ? MapValues.O : MapValues.X;
-                var result = platform.GetEndGameMessage(winner);
+                var result = platform?.GetEndGameMessage(winner);
                 if (result.ToString() == "Yes")
                 {
                     if (winner == MapValues.X)
                     {
                         PlayerXWinCount++;
-                        platform.UpdateWinnerLabel();
+                        platform?.UpdateWinnerLabel();
                     }
                     if (winner == MapValues.O)
                     {
                         PlayerOWinCount++;
-                        platform.UpdateWinnerLabel();
+                        platform?.UpdateWinnerLabel();
                     }
                     ResetMap();
-                    platform.ReleaseButtons();
+                    platform?.ReleaseButtons();
                 }
                 else
                 {
                     ResetGame();
-                    platform.ReleaseButtons();
+                    platform?.ReleaseButtons();
                 }
             }
         }
