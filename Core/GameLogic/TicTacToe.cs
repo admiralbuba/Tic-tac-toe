@@ -67,7 +67,7 @@ namespace Core
             CheckForDiagonalWinner();
         }
         public void SetInArray(string id, string value)
-        {
+        {         
             ArrayHelper.PutValuesInMap(Map, id, (MapValues)Enum.Parse(typeof(MapValues), value));
 
         }

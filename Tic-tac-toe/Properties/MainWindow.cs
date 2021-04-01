@@ -1,24 +1,34 @@
-﻿using System;
+﻿using Core.Models;
+using Core.Savers;
+using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Core.Properties;
-using Core.Savers;
 
 namespace Core
 {
     public partial class MainWindow : Form, ITicTacToe, IUIHelper
     {
         private static MainWindow instance;
+        HubConnection connection;
+
+
         private MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();                   
+            connection = new HubConnectionBuilder()
+                .WithUrl("http://localhost:3681/gamestate", Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets)
+                .Build();
+            connection.StartAsync();
+            connection.On<ButtonInfo>("ChangeButton", button => TicTacToe.Instance.MakeTurn(button.Id, button.Value, MainWindow.Instance, MainWindow.Instance));
         }
         public static MainWindow Instance => instance ??= new MainWindow();
         private void ButtonClick(object sender, EventArgs e)
         {
             var button = sender as Button;
             TicTacToe.Instance.MakeTurn(button.Name, button.Text, MainWindow.Instance, MainWindow.Instance);
+            connection.SendAsync("Send", new ButtonInfo { Id = button.Name, Value = button.Text });
         }
         public void DisableAllButtons()
         {

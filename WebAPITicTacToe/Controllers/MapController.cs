@@ -38,7 +38,7 @@ namespace WebAPITicTacToe.Controllers
         // POST api/<MapController>/A00
         [HttpPost]
         [Produces("application/json")]
-        public async Task<IActionResult> Post(ButtonInfo buttonInfo)
+        public IActionResult Post(ButtonInfo buttonInfo)
         {
             try
             {
@@ -46,7 +46,6 @@ namespace WebAPITicTacToe.Controllers
                 button.Value = buttonInfo.Value;
                 db.SaveChanges();
                 TicTacToe.Instance.MakeTurn(buttonInfo.Id, buttonInfo.Value, LogicTransfer.Instance);
-                await hubContext.Clients.All.SendAsync("ChangeButton", buttonInfo);
                 return Ok(LogicTransfer.Instance.GameState);
             }
             catch

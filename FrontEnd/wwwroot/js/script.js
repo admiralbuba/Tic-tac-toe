@@ -7,17 +7,7 @@ let gameState;
 let i = 0;
 let pending = false;
 
-//let hubConnection = new signalR.HubConnectionBuilder()
-//    .withUrl("http://localhost:3681/gamestate", { transport: signalR.HttpTransportType.WebSockets })
-//    .configureLogging(signalR.LogLevel.Information)
-//    .build()
-//hubConnection.start({ withCredentials: false })
-//    .then(res => {
-//        console.log('connection started');
-//    })
-//    .catch(err => {
-//        console.error((err));
-//    })
+
 let hubConnection = new signalR.HubConnectionBuilder()
     .withUrl("http://localhost:3681/gamestate", {
         skipNegotiation: true,
@@ -28,11 +18,10 @@ let hubConnection = new signalR.HubConnectionBuilder()
  //получение сообщения от сервера
 hubConnection.on('ChangeButton', function (button) {
     var btn = document.getElementById(button.id);
-    btn.value = turn ? "X" : "O";
+    btn.value = button.value;
     btn.disabled = true;
         });
-    // hubConnection.start({ withCredentials: false });
-    hubConnection.start();
+hubConnection.start();
 
 
     async function buttonAction(button) {
@@ -44,6 +33,7 @@ hubConnection.on('ChangeButton', function (button) {
             },
             body: JSON.stringify(button)
         })
+        hubConnection.invoke("Send", button)
         i++;
         console.log(i);
         console.log("before await");
