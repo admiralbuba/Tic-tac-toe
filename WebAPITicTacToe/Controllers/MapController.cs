@@ -20,13 +20,11 @@ namespace WebAPITicTacToe.Controllers
     [ApiController]
     public class MapController : ControllerBase
     {
-        IHubContext<GameStateHub> hubContext;
         MapContext db;
 
-        public MapController(MapContext context, IHubContext<GameStateHub> hubContext)
+        public MapController(MapContext context)
         {
             db = context;
-            this.hubContext = hubContext; 
         }
         // GET: api/<MapController>
         [HttpGet]

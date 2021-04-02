@@ -18,18 +18,6 @@
 <body>
     <script src="~/lib/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/script.js"></script>
-    @functions
-{
-        public int GetFactorial(int n)
-        {
-            int result = 1;
-            for (int i = 1; i <= n; i++)
-                result *= i;
-            return result;
-        }
-    }
-    <div>Факториал числа 6 равен: @GetFactorial(6)</div>
-    <p>Дата: @DateTime.Now.ToLongDateString()</p>
     <section>
         <h1 class="game--title">Tic Tac Toe</h1>
         <h1 class="game--title" id="turnLabel">Turn now: PLayer X</h1>
@@ -46,18 +34,8 @@
             <input onclick="change(this)" type="button" id="C21" class="cell" value="">
             <input onclick="change(this)" type="button" id="C22" class="cell" value="">
         </div>
-        <p>Дата: @DateTime.Now.ToLongDateString()</p>
         <h2 class="game--status"></h2>
         <button class="game--restart">Restart Game</button>
     </section>
-    <div>
-        <h3>Test</h3>
-        <form method="post" action="">
-            <input type="hidden" value="@ViewBag.Value" name="Id" />
-            <table>
-                <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>
-            </table>
-        </form>
-    </div>
 </body>
 </html>

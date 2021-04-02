@@ -21,11 +21,7 @@ namespace Core.GameLogic
                     }
                 }
             }
-
-
-            return (2, 2);
-
-            
+            return (2, 2);            
         }
     }
 }

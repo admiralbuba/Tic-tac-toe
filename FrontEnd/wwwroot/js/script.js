@@ -17,6 +17,7 @@ let hubConnection = new signalR.HubConnectionBuilder()
 
  //получение сообщения от сервера
 hubConnection.on('ChangeButton', function (button) {
+
     var btn = document.getElementById(button.id);
     btn.value = button.value;
     btn.disabled = true;

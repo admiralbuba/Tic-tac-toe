@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "WebAPITicTacToe\API.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Browser", "FrontEnd\Browser.csproj", "{F9F1CB79-7247-428A-B7CE-10E0F0B8BD33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{8920640E-868C-4952-8AB7-5111C8406586}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{8920640E-868C-4952-8AB7-5111C8406586}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tic-Tac-Toe.Tests", "Tic-Tac-Toe.Tests\Tic-Tac-Toe.Tests.csproj", "{19172C34-640A-444F-A4AA-562F9D7A1E6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8920640E-868C-4952-8AB7-5111C8406586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8920640E-868C-4952-8AB7-5111C8406586}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8920640E-868C-4952-8AB7-5111C8406586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19172C34-640A-444F-A4AA-562F9D7A1E6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19172C34-640A-444F-A4AA-562F9D7A1E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19172C34-640A-444F-A4AA-562F9D7A1E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19172C34-640A-444F-A4AA-562F9D7A1E6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
