@@ -9,7 +9,7 @@ let pending = false;
 
 
 let hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("http://localhost:3681/gamestate", {
+    .withUrl("http://localhost:5000/gamestate", {
         skipNegotiation: true,
         transport: signalR.HttpTransportType.WebSockets
     })
@@ -26,7 +26,7 @@ hubConnection.start();
 
 
     async function buttonAction(button) {
-        let data = await fetch('http://localhost:3681/api/map/', {
+        let data = await fetch('http://localhost:5000/api/map/', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',
@@ -44,7 +44,7 @@ hubConnection.start();
         console.log("after check");
 
         $(function () {
-            $.getScript("http://localhost:3681/api/turns/");
+            $.getScript("http://localhost:5000/api/turns/");
         });
     }
 
@@ -75,12 +75,12 @@ hubConnection.start();
             }
             document.getElementById("turnLabel").textContent = "Turn now: PLayer X";
             $.ajax({
-                url: "http://localhost:3681/api/map",
+                url: "http://localhost:5000/api/map",
                 method: "PATCH"
             })
             if (!confirm('Do you want to continue round?')) {
                 $.ajax({
-                    url: "http://localhost:3681/api/WinnersCount",
+                    url: "http://localhost:5000/api/WinnersCount",
                     method: "PATCH"
                 })
                 document.getElementById("X").textContent = 'X : 0';

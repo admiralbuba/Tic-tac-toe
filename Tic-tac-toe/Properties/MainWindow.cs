@@ -5,30 +5,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Tic_tac_toe.SignalrRHub;
 
 namespace Core
 {
     public partial class MainWindow : Form, ITicTacToe, IUIHelper
     {
         private static MainWindow instance;
-        HubConnection connection;
-
-
         private MainWindow()
         {
-            InitializeComponent();                   
-            connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:3681/gamestate", Microsoft.AspNetCore.Http.Connections.HttpTransportType.WebSockets)
-                .Build();
-            connection.StartAsync();
-            connection.On<ButtonInfo>("ChangeButton", button => TicTacToe.Instance.MakeTurn(button.Id, button.Value, MainWindow.Instance, MainWindow.Instance));
+            InitializeComponent();                 
         }
         public static MainWindow Instance => instance ??= new MainWindow();
         private void ButtonClick(object sender, EventArgs e)
         {
             var button = sender as Button;
             TicTacToe.Instance.MakeTurn(button.Name, button.Text, MainWindow.Instance, MainWindow.Instance);
-            connection.SendAsync("Send", new ButtonInfo { Id = button.Name, Value = button.Text });
+            SignalRHub.Instance.connection.SendAsync("Send", new ButtonInfo { Id = button.Name, Value = button.Text });
         }
         public void DisableAllButtons()
         {

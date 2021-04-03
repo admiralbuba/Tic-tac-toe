@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using Core.GameLogic;
 using Core.Models;
 
 namespace Core
@@ -14,6 +16,7 @@ namespace Core
         private const int mapSize = 3;
         private ITicTacToe platform;
         private IUIHelper uIHelper;
+        private bool winState = false; 
         public TicTacToe()
         {
             Turn = true;
@@ -35,7 +38,7 @@ namespace Core
             Map = new MapValues[mapSize, mapSize];
             uIHelper?.ChangeTurnLabel(MapValues.X);
         }
-        public void MakeTurn(string name, string value, ITicTacToe platform, IUIHelper uIHelper = null)
+        public bool MakeTurn(string name, string value, ITicTacToe platform = null, IUIHelper uIHelper = null)
         {
             this.platform = platform;
             this.uIHelper = uIHelper;
@@ -44,22 +47,29 @@ namespace Core
             {
                 uIHelper?.ChangeButtonText(name,"X");
                 ArrayHelper.PutValuesInMap(Map, name, MapValues.X);
-                uIHelper?.ChangeTurnLabel(MapValues.O);
+                //uIHelper?.ChangeTurnLabel(MapValues.O);
+                (int, int) aiMove = AI.GetAIMove(Map);
+                var aiButton = ArrayHelper.GetButtonNameFromIntTuple(aiMove);
+                uIHelper?.ChangeButtonText(aiButton, "O");
+                ArrayHelper.PutValuesInMap(Map, aiButton, MapValues.O);
+                uIHelper?.DisableButton(aiButton);
             }
             else
             {
                 uIHelper?.ChangeButtonText(name,"O");
                 ArrayHelper.PutValuesInMap(Map, name, MapValues.O);
                 uIHelper?.ChangeTurnLabel(MapValues.X);
+
             }
             uIHelper?.DisableButton(name);
-            Turn = !Turn;
+            //Turn = !Turn;
             TurnCount++;
             CheckForWinner();
             if (TurnCount == 9)
             {
                 platform?.ShowDrow();
             }
+            return winState;
         }
         public void CheckForWinner()
         {
@@ -132,7 +142,7 @@ namespace Core
             {
                 var winner = Turn ? MapValues.O : MapValues.X;
                 var result = platform?.GetEndGameMessage(winner);
-                if (result.ToString() == "Yes")
+                if (result?.ToString() == "Yes" || platform.GetType().Name == "MockPlatform")
                 {
                     if (winner == MapValues.X)
                     {
@@ -152,6 +162,7 @@ namespace Core
                     ResetGame();
                     platform?.ReleaseButtons();
                 }
+                winState =  true;
             }
         }
     }

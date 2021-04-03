@@ -8,7 +8,7 @@ using System.Net;
 namespace Tic_Tac_Toe.Tests
 {
     [TestFixture]
-    public class APITests : BaseMapControllerTest
+    public class MapEndpointTests : BaseMapControllerTest
     {
         [Test]
         public void CheckStatusCodeFromMapController()
